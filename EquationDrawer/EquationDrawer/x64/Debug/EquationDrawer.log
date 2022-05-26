@@ -1,0 +1,7 @@
+﻿  Reading Qt configuration (K:/QT/5.15.2/msvc2019_64/bin/qmake)
+  uic EquationDrawer.ui
+  EquationDrawer.cpp
+  main.cpp
+  qrc_EquationDrawer.cpp
+  moc_EquationDrawer.cpp
+  EquationDrawer.vcxproj -> D:\OOP project\EquationDrawer\EquationDrawer\x64\Debug\EquationDrawer.exe
