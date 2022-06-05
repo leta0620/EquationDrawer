@@ -16,19 +16,6 @@
   <widget class="QPushButton" name="pushButton_Visible">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>0</y>
-     <width>41</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>可見</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_Change">
-   <property name="geometry">
-    <rect>
      <x>270</x>
      <y>0</y>
      <width>41</width>
@@ -36,7 +23,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>修改</string>
+    <string>可見</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_Delete">
@@ -57,7 +44,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>231</width>
+     <width>271</width>
      <height>41</height>
     </rect>
    </property>

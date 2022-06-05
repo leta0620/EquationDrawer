@@ -1,16 +1,10 @@
 ﻿  Reading Qt configuration (D:/goombathings/utility/Qt/5.15.2/msvc2019_64/bin/qmake)
   uic EquationBox.ui
-  rcc EquationDrawer.qrc
   moc EquationBox.h
-   RCC: Warning: No resources in 'D:\my works\EquationDrawer\EquationDrawer\EquationDrawer\EquationDrawer.qrc'.
-  moc Input.h
   EquationBox.cpp
   EquationDrawer.cpp
-  Input.cpp
   main.cpp
 D:\my works\EquationDrawer\EquationDrawer\EquationDrawer\EquationDrawer.cpp(98): warning C4715: 'EquationDrawer::eventFilter': not all control paths return a value
-  moc_EquationDrawer.cpp
   moc_EquationBox.cpp
-  moc_Input.cpp
-  qrc_EquationDrawer.cpp
+  moc_EquationDrawer.cpp
   EquationDrawer.vcxproj -> D:\my works\EquationDrawer\EquationDrawer\x64\Debug\EquationDrawer.exe

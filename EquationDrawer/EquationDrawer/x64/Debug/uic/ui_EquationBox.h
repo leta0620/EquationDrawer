@@ -21,7 +21,6 @@ class Ui_Form
 {
 public:
     QPushButton *pushButton_Visible;
-    QPushButton *pushButton_Change;
     QPushButton *pushButton_Delete;
     QTextEdit *textEdit;
 
@@ -32,16 +31,13 @@ public:
         Form->resize(351, 41);
         pushButton_Visible = new QPushButton(Form);
         pushButton_Visible->setObjectName(QString::fromUtf8("pushButton_Visible"));
-        pushButton_Visible->setGeometry(QRect(230, 0, 41, 41));
-        pushButton_Change = new QPushButton(Form);
-        pushButton_Change->setObjectName(QString::fromUtf8("pushButton_Change"));
-        pushButton_Change->setGeometry(QRect(270, 0, 41, 41));
+        pushButton_Visible->setGeometry(QRect(270, 0, 41, 41));
         pushButton_Delete = new QPushButton(Form);
         pushButton_Delete->setObjectName(QString::fromUtf8("pushButton_Delete"));
         pushButton_Delete->setGeometry(QRect(310, 0, 41, 41));
         textEdit = new QTextEdit(Form);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(0, 0, 231, 41));
+        textEdit->setGeometry(QRect(0, 0, 271, 41));
         QFont font;
         font.setPointSize(18);
         textEdit->setFont(font);
@@ -55,7 +51,6 @@ public:
     {
         Form->setWindowTitle(QCoreApplication::translate("Form", "Form", nullptr));
         pushButton_Visible->setText(QCoreApplication::translate("Form", "\345\217\257\350\246\213", nullptr));
-        pushButton_Change->setText(QCoreApplication::translate("Form", "\344\277\256\346\224\271", nullptr));
         pushButton_Delete->setText(QCoreApplication::translate("Form", "\345\210\252\351\231\244", nullptr));
         textEdit->setHtml(QCoreApplication::translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"

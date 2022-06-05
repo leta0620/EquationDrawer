@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_EquationBox_t {
-    QByteArrayData data[7];
-    char stringdata0[132];
+    QByteArrayData data[6];
+    char stringdata0[101];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,13 +37,11 @@ QT_MOC_LITERAL(1, 12, 7), // "sendDel"
 QT_MOC_LITERAL(2, 20, 0), // ""
 QT_MOC_LITERAL(3, 21, 16), // "QListWidgetItem*"
 QT_MOC_LITERAL(4, 38, 31), // "on_pushButton_Visible_onclicked"
-QT_MOC_LITERAL(5, 70, 30), // "on_pushButton_Change_onclicked"
-QT_MOC_LITERAL(6, 101, 30) // "on_pushButton_Delete_onclicked"
+QT_MOC_LITERAL(5, 70, 30) // "on_pushButton_Delete_onclicked"
 
     },
     "EquationBox\0sendDel\0\0QListWidgetItem*\0"
     "on_pushButton_Visible_onclicked\0"
-    "on_pushButton_Change_onclicked\0"
     "on_pushButton_Delete_onclicked"
 };
 #undef QT_MOC_LITERAL
@@ -54,7 +52,7 @@ static const uint qt_meta_data_EquationBox[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -62,18 +60,16 @@ static const uint qt_meta_data_EquationBox[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x06 /* Public */,
+       1,    1,   29,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   37,    2, 0x08 /* Private */,
-       5,    0,   38,    2, 0x08 /* Private */,
-       6,    0,   39,    2, 0x08 /* Private */,
+       4,    0,   32,    2, 0x08 /* Private */,
+       5,    0,   33,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
 
  // slots: parameters
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -88,8 +84,7 @@ void EquationBox::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         switch (_id) {
         case 0: _t->sendDel((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
         case 1: _t->on_pushButton_Visible_onclicked(); break;
-        case 2: _t->on_pushButton_Change_onclicked(); break;
-        case 3: _t->on_pushButton_Delete_onclicked(); break;
+        case 2: _t->on_pushButton_Delete_onclicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -133,13 +128,13 @@ int EquationBox::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 3)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 3;
     }
     return _id;
 }

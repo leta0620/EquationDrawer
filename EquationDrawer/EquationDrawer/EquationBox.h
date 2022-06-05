@@ -13,7 +13,6 @@ public:
     void SetEquation(QString);
 private slots:
     void on_pushButton_Visible_onclicked();
-    void on_pushButton_Change_onclicked();
     void on_pushButton_Delete_onclicked();
 private:
     Ui::Form ui;

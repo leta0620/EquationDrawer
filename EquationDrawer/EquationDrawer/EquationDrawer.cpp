@@ -14,7 +14,7 @@ EquationDrawer::EquationDrawer(QWidget *parent)
 
     QSize temp = ui.graphicsView->viewport()->size();
     ui.textBrowser->setText(QString::number(temp.width()));
-
+    scene.setSceneRect(0, 0, 800, 800);
     ui.graphicsView->viewport()->installEventFilter(this);
 }
 
