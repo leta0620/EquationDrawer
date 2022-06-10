@@ -84,12 +84,17 @@ bool EquationDrawer::eventFilter(QObject* obj, QEvent* eve)
     {
         QWheelEvent* wheelEvent = static_cast<QWheelEvent*>(eve);
         int numDegrees = wheelEvent->angleDelta().y();
-        //ui.textBrowser->setText(QString::number(numDegrees));
         if (numDegrees > 0)
             factor *= 1.1;
         if (numDegrees < 0)
             factor *= 0.9;
+
+        center.x += (wheelEvent->x() - 400) / factor * 0.1;
+        center.y -= (wheelEvent->y() - 400) / factor * 0.1;
+
         paint();
+        ui.textBrowser->setText(QString::number(factor));
+        return true;
     }
     else
     {
