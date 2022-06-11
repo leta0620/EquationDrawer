@@ -1,3 +1,21 @@
-﻿  Reading Qt configuration (D:/goombathings/utility/Qt/5.15.2/msvc2019_64/bin/qmake)
+﻿  Reading Qt configuration (K:/QT/5.15.2/msvc2019_64/bin/qmake)
+  uic EquationBox.ui
+  uic EquationDrawer.ui
+  uic Input.ui
+  rcc EquationDrawer.qrc
+  moc EquationDrawer.h
+   RCC: Warning: No resources in 'D:\OOP project\EquationDrawer\git_test\EquationDrawer\EquationDrawer\EquationDrawer\EquationDrawer.qrc'.
+  moc EquationBox.h
+  moc Input.h
+  MainFuntionProcess.cpp
+  VariableProcess.cpp
+  Calculate.cpp
+  EquationBox.cpp
   EquationDrawer.cpp
-  EquationDrawer.vcxproj -> D:\my works\EquationDrawer\EquationDrawer\x64\Debug\EquationDrawer.exe
+  Input.cpp
+  main.cpp
+  qrc_EquationDrawer.cpp
+  moc_EquationDrawer.cpp
+  moc_EquationBox.cpp
+  moc_Input.cpp
+  EquationDrawer.vcxproj -> D:\OOP project\EquationDrawer\git_test\EquationDrawer\EquationDrawer\x64\Debug\EquationDrawer.exe

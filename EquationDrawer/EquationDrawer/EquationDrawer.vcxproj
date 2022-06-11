@@ -85,10 +85,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MainFuntionProcess.cpp" />
+    <ClCompile Include="VariableProcess.cpp" />
     <QtRcc Include="EquationDrawer.qrc" />
     <QtUic Include="EquationBox.ui" />
     <QtUic Include="EquationDrawer.ui" />
     <QtMoc Include="EquationDrawer.h" />
+    <ClCompile Include="Calculate.cpp" />
     <ClCompile Include="EquationBox.cpp" />
     <ClCompile Include="EquationDrawer.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -102,7 +105,10 @@
     <QtMoc Include="Input.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Calculate.h" />
+    <ClInclude Include="MainFuntionProcess.h" />
     <ClInclude Include="Pos.h" />
+    <ClInclude Include="VariableProcess.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
