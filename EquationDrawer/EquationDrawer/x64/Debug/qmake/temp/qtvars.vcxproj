@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">
     <ClCompile>
-      <AdditionalIncludeDirectories>&quot;D:\OOP project\EquationDrawer\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp&quot;;K:\QT\5.15.2\msvc2019_64\include;K:\QT\5.15.2\msvc2019_64\include\QtWidgets;K:\QT\5.15.2\msvc2019_64\include\QtGui;K:\QT\5.15.2\msvc2019_64\include\QtANGLE;K:\QT\5.15.2\msvc2019_64\include\QtCore;&quot;D:\OOP project\EquationDrawer\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp&quot;;/include;K:\QT\5.15.2\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>&quot;D:\OOP project\EquationDrawer\git\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp&quot;;K:\QT\5.15.2\msvc2019_64\include;K:\QT\5.15.2\msvc2019_64\include\QtWidgets;K:\QT\5.15.2\msvc2019_64\include\QtGui;K:\QT\5.15.2\msvc2019_64\include\QtANGLE;K:\QT\5.15.2\msvc2019_64\include\QtCore;&quot;D:\OOP project\EquationDrawer\git\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp&quot;;/include;K:\QT\5.15.2\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>.\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>

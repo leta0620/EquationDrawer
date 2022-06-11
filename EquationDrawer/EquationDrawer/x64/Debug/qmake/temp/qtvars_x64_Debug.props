@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
 <Qt_DEFINES_>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB</Qt_DEFINES_>
-<Qt_INCLUDEPATH_>"D:\OOP project\EquationDrawer\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp";K:\QT\5.15.2\msvc2019_64\include;K:\QT\5.15.2\msvc2019_64\include\QtWidgets;K:\QT\5.15.2\msvc2019_64\include\QtGui;K:\QT\5.15.2\msvc2019_64\include\QtANGLE;K:\QT\5.15.2\msvc2019_64\include\QtCore;"D:\OOP project\EquationDrawer\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp";/include;K:\QT\5.15.2\msvc2019_64\mkspecs\win32-msvc</Qt_INCLUDEPATH_>
+<Qt_INCLUDEPATH_>"D:\OOP project\EquationDrawer\git\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp";K:\QT\5.15.2\msvc2019_64\include;K:\QT\5.15.2\msvc2019_64\include\QtWidgets;K:\QT\5.15.2\msvc2019_64\include\QtGui;K:\QT\5.15.2\msvc2019_64\include\QtANGLE;K:\QT\5.15.2\msvc2019_64\include\QtCore;"D:\OOP project\EquationDrawer\git\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp";/include;K:\QT\5.15.2\msvc2019_64\mkspecs\win32-msvc</Qt_INCLUDEPATH_>
 <Qt_STDCPP_></Qt_STDCPP_>
 <Qt_CL_OPTIONS_>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus</Qt_CL_OPTIONS_>
 <Qt_LIBS_>K:\QT\5.15.2\msvc2019_64\lib\Qt5Widgetsd.lib;K:\QT\5.15.2\msvc2019_64\lib\Qt5Guid.lib;K:\QT\5.15.2\msvc2019_64\lib\Qt5Cored.lib;K:\QT\5.15.2\msvc2019_64\lib\qtmaind.lib;shell32.lib</Qt_LIBS_>
