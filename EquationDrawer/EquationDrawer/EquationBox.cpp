@@ -29,3 +29,9 @@ void EquationBox::SetEquation(QString str)
     ui.textEdit->setText(str);
 }
 
+std::string EquationBox::GetEquation()
+{
+    QString temp = ui.textEdit->toPlainText();
+    return temp.toStdString();
+}
+

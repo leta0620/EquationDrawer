@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
@@ -23,6 +24,7 @@ public:
     QPushButton *pushButton_Visible;
     QPushButton *pushButton_Delete;
     QTextEdit *textEdit;
+    QLabel *label;
 
     void setupUi(QWidget *Form)
     {
@@ -37,10 +39,17 @@ public:
         pushButton_Delete->setGeometry(QRect(310, 0, 41, 41));
         textEdit = new QTextEdit(Form);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(0, 0, 271, 41));
+        textEdit->setGeometry(QRect(0, 0, 231, 41));
         QFont font;
         font.setPointSize(18);
         textEdit->setFont(font);
+        label = new QLabel(Form);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(230, 0, 41, 41));
+        QFont font1;
+        font1.setPointSize(7);
+        label->setFont(font1);
+        label->setAlignment(Qt::AlignCenter);
 
         retranslateUi(Form);
 
@@ -57,6 +66,7 @@ public:
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'PMingLiU'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Test</p></body></html>", nullptr));
+        label->setText(QCoreApplication::translate("Form", "No Error", nullptr));
     } // retranslateUi
 
 };

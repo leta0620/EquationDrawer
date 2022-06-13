@@ -12,6 +12,8 @@
 #include "Pos.h"
 #include "EquationBox.h"
 #include "Input.h"
+#include "MainFuntionProcess.h"
+
 class EquationDrawer : public QWidget
 {
     Q_OBJECT
@@ -28,6 +30,8 @@ private:
     Ui::EquationDrawerClass ui;
     bool eventFilter(QObject* obj, QEvent* eve);
     void paint();
+    void drawLines();
+    void drawEquations();
     QGraphicsScene scene;
     double factor;
     Pos center;
