@@ -85,15 +85,21 @@ bool EquationDrawer::eventFilter(QObject* obj, QEvent* eve)
         QWheelEvent* wheelEvent = static_cast<QWheelEvent*>(eve);
         int numDegrees = wheelEvent->angleDelta().y();
         if (numDegrees > 0)
-            factor *= 1.1;
-        if (numDegrees < 0)
-            factor *= 0.9;
+        {
+            factor *= 1.25;
+            center.x += (wheelEvent->x() - 400) / factor * 0.5;
+            center.y -= (wheelEvent->y() - 400) / factor * 0.5;
+        }
+        else if (numDegrees < 0)
+        {
+            factor *= 0.8;
+        }
 
-        center.x += (wheelEvent->x() - 400) / factor * 0.1;
-        center.y -= (wheelEvent->y() - 400) / factor * 0.1;
+
 
         paint();
-        ui.textBrowser->setText(QString::number(factor));
+        QString t = QString::number(center.x) + " , " + QString::number(center.y) + " factor: " + QString::number(factor);
+        ui.textBrowser->setText(t);
         return true;
     }
     else
@@ -113,6 +119,16 @@ void EquationDrawer::paint()
 {
     scene.clear();
     ui.graphicsView->viewport()->update();
+
+    drawLines();
+    drawEquations();
+
+    ui.graphicsView->setScene(&scene);
+    ui.graphicsView->show();
+}
+
+void EquationDrawer::drawLines()
+{
     Pos start;
     Pos origin;
     start.setPos(0, 0);
@@ -190,21 +206,75 @@ void EquationDrawer::paint()
     }
     startX -= 800;
     startY -= 800;
+    /*
     for (int a = 0; a < 8; a++)
     {
         for (int b = 0; b < 8; b++)
         {
             Pos temp;
             temp = getPos(startX + a * 100, startY + b * 100);
-            //if (temp.x == origin.x || temp.y == origin.y)
-            //{
             QString p = QString::number(temp.x) + " , " + QString::number(temp.y);
             QGraphicsTextItem* text = scene.addText(p);
             text->setPos(startX + a * 100, startY + b * 100);
             scene.addItem(text);
-            //}
+        }
+    }*/
+    Pos temp;
+    int sta = 0, ed = 8;
+    if (originX < 0)
+        sta = 1;
+    else if (originX > 800)
+        ed = 7;
+    for (int a = sta; a < ed; a++)
+    {
+        if (abs(startX + a * 100 - originX) > 0.000001)
+        {
+            temp = getPos(startX + a * 100, originY);
+            QString p = QString::number(temp.x);
+            QGraphicsTextItem* text = scene.addText(p);
+            if (originY < 0)
+                text->setPos(startX + a * 100, startY);
+            else if (originY > 800)
+                text->setPos(startX + a * 100, startY + 700);
+            else
+                text->setPos(startX + a * 100, originY);
+            scene.addItem(text);
         }
     }
-    ui.graphicsView->setScene(&scene);
-    ui.graphicsView->show();
+    sta = 0;
+    ed = 8;
+    if (originY < 0)
+        sta = 1;
+    else if (originY > 800)
+        ed = 7;
+    for (int a = sta; a < ed; a++)
+    {
+        if (abs(startY + a * 100 - originY) > 0.000001)
+        {
+            temp = getPos(originX, startY + a * 100);
+            QString p = QString::number(temp.y);
+            QGraphicsTextItem* text = scene.addText(p);
+            if (originX < 0)
+                text->setPos(startX, startY + a * 100);
+            else if (originX > 800)
+                text->setPos(startX + 700, startY + a * 100);
+            else
+                text->setPos(originX, startY + a * 100);
+            scene.addItem(text);
+        }
+    }
+}
+
+void EquationDrawer::drawEquations()
+{
+    vector<string> equs;
+    for (int a = 0; a < ui.listWidget->count(); a++)
+    {
+        QListWidgetItem *temp = ui.listWidget->item(a);
+        EquationBox* tBox = dynamic_cast<EquationBox*> (ui.listWidget->itemWidget(temp));
+        equs.push_back(tBox->GetEquation());
+    }
+    double lX = center.x - 400 / factor;
+    double rX = center.x + 400 / factor;
+    FuntionProcess fun(equs, lX, rX);
 }
