@@ -80,7 +80,24 @@ vector<Pos> Calculate::GetAnsList(double start, double end)
 	this->ansList.clear();
 	CalculateAns(start, end);
 
-	return this->ansList;
+	bool allError = true;
+	for (int checkP = 0; checkP < this->ansList.size(); checkP++)
+	{
+		if (this->ansList[checkP].errorPos == false)
+		{
+			allError = false;
+		}
+	}
+
+	if (!allError)
+	{
+		return this->ansList;
+	}
+	else
+	{
+		this->ansList.clear();
+		return this->ansList;
+	}
 }
 
 // 計算方程式(執行到切割後續式)
@@ -408,7 +425,7 @@ void Calculate::CutInput()
 		{
 			operatorNum++;
 		}
-		else
+		else if (postfix[checkOperator] != "@")
 		{
 			numberNum++;
 		}
@@ -440,14 +457,15 @@ void Calculate::CalculateAns(double start, double end)
 {
 	int calculateTimes = 800;	// 需計算的次數
 
+	vector<Pos> tmpVector;
 	for (int ansRound = 0; ansRound < calculateTimes; ansRound++)
 	{
 		double x = start + (ansRound * ((end - start) / 800));
+		Pos tmp;
 
 		double ans = this->CalculateAnsSingal(x);
 		if (ans != -1)
 		{
-			Pos tmp;
 			tmp.setPos(x, ans);
 
 			if (this->runError == true)
@@ -501,6 +519,10 @@ double Calculate::CalculateAns()
 				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 2][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 2][0] = '-';
+					}
 					a = stod(postOrderCalculation[formulaDigit - 2]);
 				}
 
@@ -511,6 +533,10 @@ double Calculate::CalculateAns()
 				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 1][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 1][0] = '-';
+					}
 					b = stod(postOrderCalculation[formulaDigit - 1]);
 				}
 
@@ -540,6 +566,10 @@ double Calculate::CalculateAns()
 				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 2][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 2][0] = '-';
+					}
 					a = stod(postOrderCalculation[formulaDigit - 2]);
 				}
 
@@ -550,6 +580,10 @@ double Calculate::CalculateAns()
 				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 1][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 1][0] = '-';
+					}
 					b = stod(postOrderCalculation[formulaDigit - 1]);
 				}
 
@@ -579,6 +613,10 @@ double Calculate::CalculateAns()
 				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 2][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 2][0] = '-';
+					}
 					a = stod(postOrderCalculation[formulaDigit - 2]);
 				}
 
@@ -589,6 +627,10 @@ double Calculate::CalculateAns()
 				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 1][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 1][0] = '-';
+					}
 					b = stod(postOrderCalculation[formulaDigit - 1]);
 				}
 
@@ -624,6 +666,10 @@ double Calculate::CalculateAns()
 				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 2][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 2][0] = '-';
+					}
 					a = stod(postOrderCalculation[formulaDigit - 2]);
 				}
 
@@ -634,6 +680,10 @@ double Calculate::CalculateAns()
 				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 1][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 1][0] = '-';
+					}
 					b = stod(postOrderCalculation[formulaDigit - 1]);
 				}
 
@@ -669,6 +719,10 @@ double Calculate::CalculateAns()
 				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 2][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 2][0] = '-';
+					}
 					a = stod(postOrderCalculation[formulaDigit - 2]);
 				}
 
@@ -679,6 +733,10 @@ double Calculate::CalculateAns()
 				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 1][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 1][0] = '-';
+					}
 					b = stod(postOrderCalculation[formulaDigit - 1]);
 				}
 
@@ -704,6 +762,11 @@ double Calculate::CalculateAns()
 		{
 			if (formulaDigit >= 1)
 			{
+				if (postOrderCalculation[formulaDigit - 1][0] == '@')
+				{
+					postOrderCalculation[formulaDigit - 1][0] = '-';
+				}
+
 				string tmp = "-";
 				if (postOrderCalculation[formulaDigit - 1][0] == '-')
 				{
@@ -726,9 +789,14 @@ double Calculate::CalculateAns()
 	}
 
 	// 計算結果
+	if (postOrderCalculation[0][0] == '@')
+	{
+		postOrderCalculation[0][0] = '-';
+	}
+
 	string result = postOrderCalculation[0];
 	// 檢查是否有殘留運算元
-	if (postOrderCalculation.size() > 1 || !(result[0] >= '0' && result[0] <= '9'))
+	if (postOrderCalculation.size() > 1 || !((result[0] >= '0' && result[0] <= '9') || result[0] == '-'))
 	{
 		this->cError = 10;
 		return -1;
@@ -757,8 +825,16 @@ double Calculate::CalculateAnsSingal(double x)
 				{
 					a = x;
 				}
+				else if (postOrderCalculation[formulaDigit - 2] == "-x" || postOrderCalculation[formulaDigit - 2] == "@x")
+				{
+					a = 0 - x;
+				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 2][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 2][0] = '-';
+					}
 					a = stod(postOrderCalculation[formulaDigit - 2]);
 				}
 
@@ -766,8 +842,16 @@ double Calculate::CalculateAnsSingal(double x)
 				{
 					b = x;
 				}
+				else if (postOrderCalculation[formulaDigit - 1] == "-x" || postOrderCalculation[formulaDigit - 1] == "@x")
+				{
+					b = 0 - x;
+				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 1][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 1][0] = '-';
+					}
 					b = stod(postOrderCalculation[formulaDigit - 1]);
 				}
 
@@ -794,8 +878,16 @@ double Calculate::CalculateAnsSingal(double x)
 				{
 					a = x;
 				}
+				else if (postOrderCalculation[formulaDigit - 2] == "-x" || postOrderCalculation[formulaDigit - 2] == "@x")
+				{
+					a = 0 - x;
+				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 2][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 2][0] = '-';
+					}
 					a = stod(postOrderCalculation[formulaDigit - 2]);
 				}
 
@@ -803,8 +895,16 @@ double Calculate::CalculateAnsSingal(double x)
 				{
 					b = x;
 				}
+				else if (postOrderCalculation[formulaDigit - 1] == "-x" || postOrderCalculation[formulaDigit - 1] == "@x")
+				{
+					b = 0 - x;
+				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 1][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 1][0] = '-';
+					}
 					b = stod(postOrderCalculation[formulaDigit - 1]);
 				}
 
@@ -831,8 +931,16 @@ double Calculate::CalculateAnsSingal(double x)
 				{
 					a = x;
 				}
+				else if (postOrderCalculation[formulaDigit - 2] == "-x" || postOrderCalculation[formulaDigit - 2] == "@x")
+				{
+					a = 0 - x;
+				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 2][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 2][0] = '-';
+					}
 					a = stod(postOrderCalculation[formulaDigit - 2]);
 				}
 
@@ -840,8 +948,16 @@ double Calculate::CalculateAnsSingal(double x)
 				{
 					b = x;
 				}
+				else if (postOrderCalculation[formulaDigit - 1] == "-x" || postOrderCalculation[formulaDigit - 1] == "@x")
+				{
+					b = 0 - x;
+				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 1][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 1][0] = '-';
+					}
 					b = stod(postOrderCalculation[formulaDigit - 1]);
 				}
 
@@ -874,8 +990,16 @@ double Calculate::CalculateAnsSingal(double x)
 				{
 					a = x;
 				}
+				else if (postOrderCalculation[formulaDigit - 2] == "-x" || postOrderCalculation[formulaDigit - 2] == "@x")
+				{
+					a = 0 - x;
+				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 2][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 2][0] = '-';
+					}
 					a = stod(postOrderCalculation[formulaDigit - 2]);
 				}
 
@@ -883,8 +1007,16 @@ double Calculate::CalculateAnsSingal(double x)
 				{
 					b = x;
 				}
+				else if (postOrderCalculation[formulaDigit - 1] == "-x" || postOrderCalculation[formulaDigit - 1] == "@x")
+				{
+					b = 0 - x;
+				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 1][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 1][0] = '-';
+					}
 					b = stod(postOrderCalculation[formulaDigit - 1]);
 				}
 
@@ -917,8 +1049,16 @@ double Calculate::CalculateAnsSingal(double x)
 				{
 					a = x;
 				}
+				else if (postOrderCalculation[formulaDigit - 2] == "-x" || postOrderCalculation[formulaDigit - 2] == "@x")
+				{
+					a = 0 - x;
+				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 2][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 2][0] = '-';
+					}
 					a = stod(postOrderCalculation[formulaDigit - 2]);
 				}
 
@@ -928,10 +1068,63 @@ double Calculate::CalculateAnsSingal(double x)
 				}
 				else
 				{
+					if (postOrderCalculation[formulaDigit - 1][0] == '@')
+					{
+						postOrderCalculation[formulaDigit - 1][0] = '-';
+					}
 					b = stod(postOrderCalculation[formulaDigit - 1]);
 				}
 
-				tmp = to_string(pow(a, b));
+				// 次方運算判斷
+
+				if (b == 0)
+				{
+					tmp = "1";
+				}
+				else if (a >= 0 && b > 0)
+				{
+					tmp = to_string(pow(a, b));
+				}
+				else if (a >= 0 && b < 0)
+				{
+					b = 0 - b;
+					double ans = pow(a, b);
+					ans = 1 / ans;
+					tmp = to_string(ans);
+				}
+				else if (a < 0 && b < 0)
+				{
+					if ((int)b == b)
+					{
+						a = 0 - a;
+						b = 0 - b;
+						double ans = pow(a, b);
+						ans = 1 / ans;
+
+						if ((int)b % 2 == 1)
+						{
+							tmp = "-";
+						}
+						tmp += to_string(ans);
+					}
+					else
+					{
+						this->cError = 10;
+						return -1;
+					}
+				}
+				else if (a < 0 && b > 0)
+				{
+					a = 0 - a;
+					double ans = pow(a, b);
+
+					if ((int)b % 2 == 1)
+					{
+						tmp = "-";
+					}
+					tmp += to_string(ans);
+				}
+
 				postOrderCalculation[formulaDigit - 2] = tmp;
 				postOrderCalculation.erase(postOrderCalculation.begin() + formulaDigit - 1, postOrderCalculation.begin() + formulaDigit + 1);
 				formulaDigit = 0;
@@ -954,6 +1147,12 @@ double Calculate::CalculateAnsSingal(double x)
 			if (formulaDigit >= 1)
 			{
 				string tmp = "-";
+
+				if (postOrderCalculation[formulaDigit - 1][0] == '@')
+				{
+					postOrderCalculation[formulaDigit - 1][0] = '-';
+				}
+
 				if (postOrderCalculation[formulaDigit - 1][0] == '-')
 				{
 					postOrderCalculation[formulaDigit - 1].erase(0, 1);
@@ -975,10 +1174,20 @@ double Calculate::CalculateAnsSingal(double x)
 	}
 
 	// 計算結果
+	if (postOrderCalculation[0][0] == '@')
+	{
+		postOrderCalculation[0][0] = '-';
+	}
+
 	if (postOrderCalculation[0] == "x")
 	{
 		postOrderCalculation[0] = to_string(x);
 	}
+	else if (postOrderCalculation[0] == "-x")
+	{
+		postOrderCalculation[0] = to_string(0 - x);
+	}
+
 	string result = postOrderCalculation[0];
 
 	// 檢查是否有殘留運算元

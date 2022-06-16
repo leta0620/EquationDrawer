@@ -115,20 +115,42 @@ void FuntionProcess::InputProcess(vector<string> iniInputList)
 							}
 						}
 
-						double variableNum = tmp.GetAnsList();
-
 						this->inputList[ini].errorType = tmp.GetCError();
 
-						// 添加新變數
-						if (tmp.GetCError() == 0)
+						// 檢查是否有違法變數
+						for (int checkV = 0; checkV < tmp.GetPostOrderFormula().size(); checkV++)
 						{
-							VariableItem newVariable;
-
-							newVariable.name = variableTmp;
-							newVariable.num = variableNum;
-
-							this->variableList.push_back(newVariable);
+							string checkStr = tmp.GetPostOrderFormula()[checkV];
+							if (!(checkStr[0] >= '0' && checkStr[0] <= '9'))
+							{
+								if (!(checkStr[0] == 'x' || checkStr[0] == '+' || checkStr[0] == '-' || checkStr[0] == '*' || checkStr[0] == '/' || checkStr[0] == '@'))
+								{
+									this->inputList[ini].errorType = 13;
+									break;
+								}
+							}
 						}
+
+						if (this->inputList[ini].errorType == 0)
+						{
+							double variableNum = 0;
+
+							variableNum = tmp.GetAnsList();
+
+							this->inputList[ini].errorType = tmp.GetCError();
+
+							// 添加新變數
+							if (this->inputList[ini].errorType == 0)
+							{
+								VariableItem newVariable;
+
+								newVariable.name = variableTmp;
+								newVariable.num = variableNum;
+
+								this->variableList.push_back(newVariable);
+							}
+						}
+
 
 					}
 					// 錯誤
@@ -172,7 +194,7 @@ void FuntionProcess::CalculateAllFuntion(double start, double end)
 				string checkStr = tmp.GetPostOrderFormula()[checkV];
 				if (!(checkStr[0] >= '0' && checkStr[0] <= '9'))
 				{
-					if (!(checkStr[0] == 'x' || checkStr[0] == '+' || checkStr[0] == '-' || checkStr[0] == '*' || checkStr[0] == '/' || checkStr[0] == '@'))
+					if (!(checkStr[0] == 'x' || checkStr[0] == '+' || checkStr[0] == '-' || checkStr[0] == '*' || checkStr[0] == '/' || checkStr[0] == '@' || checkStr[0] == '^'))
 					{
 						this->inputList[round].errorType = 13;
 						break;
@@ -182,8 +204,17 @@ void FuntionProcess::CalculateAllFuntion(double start, double end)
 
 			if (this->inputList[round].errorType == 0)
 			{
-				this->drawList.push_back(tmp.GetAnsList(start, end));
-				this->colorList.push_back(round);
+				vector<Pos> draw = tmp.GetAnsList(start, end);
+
+				if (!draw.empty())
+				{
+					this->drawList.push_back(draw);
+					this->colorList.push_back(round);
+				}
+				else
+				{
+					this->inputList[round].errorType = tmp.GetCError();
+				}
 			}
 		}
 	}
