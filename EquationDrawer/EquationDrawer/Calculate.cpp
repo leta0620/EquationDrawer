@@ -32,6 +32,7 @@ int OperatorPriority(char in)
 Calculate::Calculate()
 {
 	this->cError = 0;
+	this->runError = false;
 	this->ansList.clear();
 	this->originFormula = "";
 	this->processFormula = "";
@@ -39,6 +40,7 @@ Calculate::Calculate()
 Calculate::Calculate(string formula)
 {
 	this->cError = 0;
+	this->runError = false;
 	this->ansList.clear();
 	this->originFormula = "";
 	this->processFormula = "";
@@ -398,6 +400,25 @@ void Calculate::CutInput()
 		sign.pop_back();
 	}
 
+	// 確認符號數量是否正確
+	int operatorNum = 0, numberNum = 0;
+	for (int checkOperator = 0; checkOperator < postfix.size(); checkOperator++)
+	{
+		if (postfix[checkOperator] == "*" || postfix[checkOperator] == "/" || postfix[checkOperator] == "+" || postfix[checkOperator] == "-" || postfix[checkOperator] == "^")
+		{
+			operatorNum++;
+		}
+		else
+		{
+			numberNum++;
+		}
+	}
+
+	if (operatorNum != numberNum - 1)
+	{
+		this->cError = 10;
+	}
+
 	this->postOrderFormula = postfix;
 }
 
@@ -429,12 +450,35 @@ void Calculate::CalculateAns(double start, double end)
 			Pos tmp;
 			tmp.setPos(x, ans);
 
+			if (this->runError == true)
+			{
+				tmp.SetErrorPos(true);
+				this->runError = false;
+			}
+
 			this->ansList.push_back(tmp);
 		}
 	}
 }
 
-// 計算結果
+
+// 獲取錯誤代碼
+int Calculate::GetCError()
+{
+	return this->cError;
+}
+
+// 更改後序式
+void Calculate::SetPostOrder(int Loc, string input)
+{
+	if (Loc <= this->postOrderFormula.size() - 1)
+	{
+		this->postOrderFormula[Loc] = input;
+	}
+}
+
+
+// 計算結果(內部用)
 double Calculate::CalculateAns()
 {
 	// 計算
@@ -931,28 +975,25 @@ double Calculate::CalculateAnsSingal(double x)
 	}
 
 	// 計算結果
+	if (postOrderCalculation[0] == "x")
+	{
+		postOrderCalculation[0] = to_string(x);
+	}
 	string result = postOrderCalculation[0];
+
 	// 檢查是否有殘留運算元
-	if (postOrderCalculation.size() > 1 || !(result[0] >= '0' && result[0] <= '9'))
+	if (postOrderCalculation.size() > 1 || !((result[0] >= '0' && result[0] <= '9') || result[0] == '-'))
 	{
 		this->cError = 10;
 		return -1;
 	}
 
+	if (this->cError != 0)
+	{
+		runError = true;
+		this->cError = 0;
+	}
+
 	return stod(result);
 }
 
-// 獲取錯誤代碼
-int Calculate::GetCError()
-{
-	return this->cError;
-}
-
-// 更改後序式
-void Calculate::SetPostOrder(int Loc, string input)
-{
-	if (Loc <= this->postOrderFormula.size() - 1)
-	{
-		this->postOrderFormula[Loc] = input;
-	}
-}

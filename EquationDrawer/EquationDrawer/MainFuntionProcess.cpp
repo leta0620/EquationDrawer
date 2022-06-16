@@ -164,11 +164,26 @@ void FuntionProcess::CalculateAllFuntion(double start, double end)
 				}
 			}
 
-			this->inputList[round].input = tmp.GetCError();
+			this->inputList[round].errorType = tmp.GetCError();
 
-			if (tmp.GetCError() == 0)
+			// 檢查是否有違法變數
+			for (int checkV = 0; checkV < tmp.GetPostOrderFormula().size(); checkV++)
+			{
+				string checkStr = tmp.GetPostOrderFormula()[checkV];
+				if (!(checkStr[0] >= '0' && checkStr[0] <= '9'))
+				{
+					if (!(checkStr[0] == 'x' || checkStr[0] == '+' || checkStr[0] == '-' || checkStr[0] == '*' || checkStr[0] == '/' || checkStr[0] == '@'))
+					{
+						this->inputList[round].errorType = 13;
+						break;
+					}
+				}
+			}
+
+			if (this->inputList[round].errorType == 0)
 			{
 				this->drawList.push_back(tmp.GetAnsList(start, end));
+				this->colorList.push_back(round);
 			}
 		}
 	}
@@ -192,4 +207,10 @@ vector<int> FuntionProcess::GetErrorList()
 vector<vector<Pos>> FuntionProcess::GetDrawList()
 {
 	return this->drawList;
+}
+
+// 獲取可繪製的清單，對應到原始輸入的哪幾行
+vector<int> FuntionProcess::GetColorList()
+{
+	return this->colorList;
 }
