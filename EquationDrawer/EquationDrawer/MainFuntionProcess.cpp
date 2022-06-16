@@ -1,5 +1,7 @@
 #include "MainFuntionProcess.h"
 
+//-----------FuntionProcess-----------//
+
 // ﹍て
 FuntionProcess::FuntionProcess()
 {
@@ -83,13 +85,50 @@ void FuntionProcess::InputProcess(vector<string> iniInputList)
 						variableTmp += iniFormula[test];
 					}
 
+					// 絋粄跑计琌
+					for (int checkV = 0; checkV < this->variableList.size(); checkV++)
+					{
+						if (this->variableList[checkV].name == variableTmp)
+						{
+							this->inputList[ini].errorType = 14;
+							break;
+						}
+					}
+
 					// 跑计
-					if (errorVariableName == false && hasEqual == true)
+					if (errorVariableName == false && hasEqual == true && this->inputList[ini].errorType == 0)
 					{
 						// 矪瞶跑计
-						iniFormula.erase(0, variableTmp.size());
+						iniFormula.erase(0, variableTmp.size() + 1);
 
 						Calculate tmp(iniFormula);
+
+						// 盢Αい跑计盿计
+						for (int i = 0; i < this->variableList.size(); i++)
+						{
+							for (int j = 0; j < tmp.GetPostOrderFormula().size(); j++)
+							{
+								if (this->variableList[i].name == tmp.GetPostOrderFormula()[j])
+								{
+									tmp.SetPostOrder(j, to_string(this->variableList[i].num));
+								}
+							}
+						}
+
+						double variableNum = tmp.GetAnsList();
+
+						this->inputList[ini].errorType = tmp.GetCError();
+
+						// 睰穝跑计
+						if (tmp.GetCError() == 0)
+						{
+							VariableItem newVariable;
+
+							newVariable.name = variableTmp;
+							newVariable.num = variableNum;
+
+							this->variableList.push_back(newVariable);
+						}
 
 					}
 					// 岿粇
@@ -112,6 +151,18 @@ void FuntionProcess::CalculateAllFuntion(double start, double end)
 		if (this->inputList[round].isFuntion)
 		{
 			Calculate tmp(this->inputList[round].input);
+
+			// 盢Αい跑计盿计
+			for (int i = 0; i < this->variableList.size(); i++)
+			{
+				for (int j = 0; j < tmp.GetPostOrderFormula().size(); j++)
+				{
+					if (this->variableList[i].name == tmp.GetPostOrderFormula()[j])
+					{
+						tmp.SetPostOrder(j, to_string(this->variableList[i].num));
+					}
+				}
+			}
 
 			this->inputList[round].input = tmp.GetCError();
 

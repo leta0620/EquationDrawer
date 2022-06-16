@@ -23,11 +23,15 @@ public:
 	// 獲取錯誤代碼
 	int GetCError();
 
+	// 獲取運算式答案(無帶入x)
+	double GetAnsList();
 	// 獲取運算式答案(單一數字點)
 	vector<Pos> GetAnsList(double singalNum);
 	// 獲取運算式答案(連續數字串)
 	vector<Pos> GetAnsList(double start, double end);
 
+	// 更改後序式
+	void SetPostOrder(int Loc, string input);
 
 private:
 	int cError;
@@ -47,6 +51,8 @@ private:
 	void SetInput(string input);
 	// 切割並轉為後序
 	void CutInput();
+	// 計算結果
+	double CalculateAns();
 	// 計算帶入數字的結果(單一值)
 	void CalculateAns(double x);
 	// 計算帶入數字的結果(範圍值)
