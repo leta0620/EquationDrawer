@@ -52,9 +52,6 @@
     <ClCompile Include="MainFuntionProcess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VariableProcess.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="EquationBox.ui">
@@ -80,9 +77,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MainFuntionProcess.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VariableProcess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

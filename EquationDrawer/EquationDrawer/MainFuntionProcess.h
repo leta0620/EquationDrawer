@@ -1,11 +1,18 @@
 #pragma once
-#include "VariableProcess.h"
 #include "Calculate.h"
+#include "Pos.h"
 
 struct OriginInput
 {
 	string input;
 	int errorType = 0;
+	bool isFuntion = true;
+};
+
+struct VariableItem
+{
+	string name;
+	double num;
 };
 
 // 函數處理類別
@@ -20,24 +27,22 @@ public:
 	// 處理輸入
 	void InputProcess(vector<string> iniInputList);
 
-	//// 獲取錯誤碼
-	//int GetErrorType();
-	// 獲取錯誤代碼和詳細資料
-	string GetErrorTypeAndInformation();
+	// 給定範圍進行計算
+	void CalculateAllFuntion(double start, double end);
 
-	// 獲得原始輸入清單
-	vector<OriginInput> GetInputList;
-	// 獲取變數清單
-	vector<VariableProcess> GetVariableList;
-	// 獲取方程式清單
-	vector<Calculate> GetFuntionList;
-	// 將變數值放入函式
-	void PutInVariable();
+
+	// 獲取錯誤碼清單
+	vector<int> GetErrorList();
+	// 獲取要繪製的座標清單
+	vector<vector<Pos>> GetDrawList();
+
 
 private:
-	vector<OriginInput> inputList;
-	vector<VariableProcess> variableList;
-	vector<Calculate> funtionList;
+	vector<OriginInput> inputList;	// 輸入清單，包含錯誤值和是否為函式的判斷
+	vector<string> funtionList;	// 函式清單
+	vector<VariableItem> variableList;	// 變數清單
+
+	vector<vector<Pos>> drawList;	// 繪圖清單，裡面會放可繪製的座標清單
 
 	/*
 	a = 3
