@@ -24,6 +24,7 @@ public:
 private slots:
     void on_pushButton_Add_onclicked();
     void on_pushButton_Draw_onclicked();
+    void on_pushButton_Back_onclicked();
     void receiveDel(QListWidgetItem*);
     void receiveInput(QString);
 private:

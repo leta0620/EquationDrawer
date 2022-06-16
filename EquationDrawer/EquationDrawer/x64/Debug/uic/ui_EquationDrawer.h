@@ -27,6 +27,7 @@ public:
     QPushButton *pushButton_Add;
     QTextBrowser *textBrowser;
     QGraphicsView *graphicsView;
+    QPushButton *pushButton_Back;
 
     void setupUi(QWidget *EquationDrawerClass)
     {
@@ -38,7 +39,7 @@ public:
         listWidget->setGeometry(QRect(840, 90, 351, 541));
         pushButton_Draw = new QPushButton(EquationDrawerClass);
         pushButton_Draw->setObjectName(QString::fromUtf8("pushButton_Draw"));
-        pushButton_Draw->setGeometry(QRect(950, 720, 141, 61));
+        pushButton_Draw->setGeometry(QRect(1040, 720, 141, 61));
         QFont font;
         font.setPointSize(18);
         pushButton_Draw->setFont(font);
@@ -59,6 +60,10 @@ public:
         graphicsView->setGeometry(QRect(0, 0, 810, 810));
         graphicsView->setSceneRect(QRectF(0, 0, 0, 0));
         graphicsView->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        pushButton_Back = new QPushButton(EquationDrawerClass);
+        pushButton_Back->setObjectName(QString::fromUtf8("pushButton_Back"));
+        pushButton_Back->setGeometry(QRect(850, 720, 141, 61));
+        pushButton_Back->setFont(font);
 
         retranslateUi(EquationDrawerClass);
 
@@ -75,6 +80,7 @@ public:
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'PMingLiU'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Test</p></body></html>", nullptr));
+        pushButton_Back->setText(QCoreApplication::translate("EquationDrawerClass", "\345\233\236\345\216\237\351\273\236", nullptr));
     } // retranslateUi
 
 };
