@@ -15,6 +15,7 @@ FuntionProcess::FuntionProcess(vector<string> iniInputList)
 FuntionProcess::FuntionProcess(vector<string> iniInputList, double start, double end)
 {
 	InputProcess(iniInputList);
+	CalculateAllFuntion(start, end);
 }
 
 
@@ -50,51 +51,94 @@ void FuntionProcess::InputProcess(vector<string> iniInputList)
 				// 方程式
 				if (iniFormula[0] == 'y' && iniFormula[1] == '=')
 				{
+					// 先把所有funtion分類進funtionList
 					iniFormula.erase(0, 2);
-					Calculate funtionCalculate(iniFormula);
-					this->funtionList.push_back(funtionCalculate);
+					this->inputList[ini].input = iniFormula;
+					this->inputList[ini].isFuntion = true;
 				}
 				else
 				{
+					this->inputList[ini].isFuntion = false;
+
 					// 測試變數名稱是否合法
 					bool errorVariableName = false;
+					bool hasEqual = false;
+					string variableTmp;
 					int test = 0;
 					for (; test < iniFormula.size(); test++)
 					{
 						if (iniFormula[test] == '=')
 						{
+							hasEqual = true;
 							break;
 						}
 						else if (!((iniFormula[test] >= 'a' && iniFormula[test] <= 'z') || (iniFormula[test] >= 'A' && iniFormula[test] <= 'Z') || (iniFormula[test] >= '0' && iniFormula[test] <= '9')))
 						{
 							// 變數名稱錯誤
 							errorVariableName = true;
+							this->inputList[ini].errorType = 13;
 							break;
 						}
+
+						variableTmp += iniFormula[test];
 					}
 
 					// 變數
-					if (errorVariableName == false)
+					if (errorVariableName == false && hasEqual == true)
 					{
-						// 建立變數類別
-						VariableProcess variable(iniFormula);
+						// 處理變數
+						iniFormula.erase(0, variableTmp.size());
+
+						Calculate tmp(iniFormula);
 
 					}
 					// 錯誤
-					else if (errorVariableName == true)
+					else if (errorVariableName == true || hasEqual == false)
 					{
-						this->inputList[ini].errorType = 1;
+						this->inputList[ini].errorType = 13;
 						continue;
 					}
-
 				}
 			}
 		}
 	}
 }
 
-// 將變數值放入函式
-void FuntionProcess::PutInVariable()
+// 給定範圍進行計算
+void FuntionProcess::CalculateAllFuntion(double start, double end)
 {
+	for (int round = 0; round < this->inputList.size(); round++)
+	{
+		if (this->inputList[round].isFuntion)
+		{
+			Calculate tmp(this->inputList[round].input);
 
+			this->inputList[round].input = tmp.GetCError();
+
+			if (tmp.GetCError() == 0)
+			{
+				this->drawList.push_back(tmp.GetAnsList(start, end));
+			}
+		}
+	}
+}
+
+// 獲取錯誤碼清單
+vector<int> FuntionProcess::GetErrorList()
+{
+	vector<int> errorList;
+
+	// 將錯誤碼提出來
+	for (int i = 0; i < this->inputList.size(); i++)
+	{
+		errorList.push_back(inputList[i].errorType);
+	}
+
+	return errorList;
+}
+
+// 獲取要繪製的座標清單
+vector<vector<Pos>> FuntionProcess::GetDrawList()
+{
+	return this->drawList;
 }

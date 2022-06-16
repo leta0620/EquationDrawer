@@ -45,52 +45,37 @@ Calculate::Calculate(string formula)
 
 	Calculation(formula);
 }
-Calculate::Calculate(string formula, double singalNum)
-{
-	this->cError = 0;
-	this->ansList.clear();
-	this->originFormula = "";
-	this->processFormula = "";
-
-	Calculation(formula);
-	this->CalculateAns(singalNum);
-}
-Calculate::Calculate(string formula, double start, double end)
-{
-	this->cError = 0;
-	this->ansList.clear();
-	this->originFormula = "";
-	this->processFormula = "";
-
-	Calculation(formula);
-	this->CalculateAns(start, end);
-}
 
 
-
+// 獲取初始運算式
 string Calculate::GetOriginFormula()
 {
 	return this->originFormula;
 }
+// 獲取後序式
 vector<string> Calculate::GetPostOrderFormula()
 {
 	return this->postOrderFormula;
 }
 
 // 獲取運算式答案(單一數字點)
-vector<double> Calculate::GetAnsList(double singalNum)
+vector<Pos> Calculate::GetAnsList(double singalNum)
 {
-	vector<double> tmp;
-	return tmp;
+	this->ansList.clear();
+	CalculateAns(singalNum);
+
+	return this->ansList;
 }
 // 獲取運算式答案(連續數字串)
-vector<double> Calculate::GetAnsList(double start, double end)
+vector<Pos> Calculate::GetAnsList(double start, double end)
 {
-	vector<double> tmp;
-	return tmp;
+	this->ansList.clear();
+	CalculateAns(start, end);
+
+	return this->ansList;
 }
 
-// 計算方程式
+// 計算方程式(執行到切割後續式)
 void Calculate::Calculation(string input)
 {
 	SetInput(input);
@@ -205,6 +190,10 @@ void Calculate::CutInput()
 			// 輸入為 56ABC 等等，先數字再文字的錯誤輸入
 			if ((this->processFormula[loc] >= 'A' && this->processFormula[loc] <= 'Z') || (this->processFormula[loc] >= 'a' && this->processFormula[loc] <= 'z'))
 			{
+				if (this->processFormula[loc] == 'x')
+				{
+					continue;
+				}
 				this->cError = 3;
 				return;
 			}
@@ -409,27 +398,32 @@ void Calculate::CutInput()
 // 計算帶入數字的結果(單一值)
 void Calculate::CalculateAns(double x)
 {
-	int ans = this->CalculateAnsSingal(x);
+	double ans = this->CalculateAnsSingal(x);
 	if (this->cError == 0)
 	{
-		this->ansList.push_back(ans);
+		Pos tmp;
+		tmp.setPos(x, ans);
+
+		this->ansList.push_back(tmp);
 	}
 }
 
 // 計算帶入數字的結果(範圍值)
 void Calculate::CalculateAns(double start, double end)
 {
-	int precision = 100;	// 精度，start 到 end 要切分成多少，若為每次加1，則為1，若為每次加0.1，則為10
-	int calculateTimes = (end - start) * precision;	// 需計算的次數
+	int calculateTimes = 800;	// 需計算的次數
 
 	for (int ansRound = 0; ansRound < calculateTimes; ansRound++)
 	{
-		int x = start + ansRound / precision;
+		double x = start + (ansRound * ((end - start) / 800));
 
-		int ans = this->CalculateAnsSingal(x);
+		double ans = this->CalculateAnsSingal(x);
 		if (ans != -1)
 		{
-			this->ansList.push_back(ans);
+			Pos tmp;
+			tmp.setPos(x, ans);
+
+			this->ansList.push_back(tmp);
 		}
 	}
 }
@@ -449,8 +443,25 @@ double Calculate::CalculateAnsSingal(double x)
 			{
 				string tmp;
 				double a = 0, b = 0;
-				a = stod(postOrderCalculation[formulaDigit - 2]);
-				b = stod(postOrderCalculation[formulaDigit - 1]);
+
+				if (postOrderCalculation[formulaDigit - 2] == "x")
+				{
+					a = x;
+				}
+				else
+				{
+					a = stod(postOrderCalculation[formulaDigit - 2]);
+				}
+
+				if (postOrderCalculation[formulaDigit - 1] == "x")
+				{
+					b = x;
+				}
+				else
+				{
+					b = stod(postOrderCalculation[formulaDigit - 1]);
+				}
+
 				tmp = to_string(a + b);
 				postOrderCalculation[formulaDigit - 2] = tmp;
 				postOrderCalculation.erase(postOrderCalculation.begin() + formulaDigit - 1, postOrderCalculation.begin() + formulaDigit + 1);
@@ -469,8 +480,25 @@ double Calculate::CalculateAnsSingal(double x)
 			{
 				string tmp;
 				double a = 0, b = 0;
-				a = stod(postOrderCalculation[formulaDigit - 2]);
-				b = stod(postOrderCalculation[formulaDigit - 1]);
+
+				if (postOrderCalculation[formulaDigit - 2] == "x")
+				{
+					a = x;
+				}
+				else
+				{
+					a = stod(postOrderCalculation[formulaDigit - 2]);
+				}
+
+				if (postOrderCalculation[formulaDigit - 1] == "x")
+				{
+					b = x;
+				}
+				else
+				{
+					b = stod(postOrderCalculation[formulaDigit - 1]);
+				}
+
 				tmp = to_string(a - b);
 				postOrderCalculation[formulaDigit - 2] = tmp;
 				postOrderCalculation.erase(postOrderCalculation.begin() + formulaDigit - 1, postOrderCalculation.begin() + formulaDigit + 1);
@@ -489,8 +517,25 @@ double Calculate::CalculateAnsSingal(double x)
 			{
 				string tmp;
 				double a = 0, b = 0;
-				a = stod(postOrderCalculation[formulaDigit - 2]);
-				b = stod(postOrderCalculation[formulaDigit - 1]);
+
+				if (postOrderCalculation[formulaDigit - 2] == "x")
+				{
+					a = x;
+				}
+				else
+				{
+					a = stod(postOrderCalculation[formulaDigit - 2]);
+				}
+
+				if (postOrderCalculation[formulaDigit - 1] == "x")
+				{
+					b = x;
+				}
+				else
+				{
+					b = stod(postOrderCalculation[formulaDigit - 1]);
+				}
+
 				tmp = to_string(a * b);
 				postOrderCalculation[formulaDigit - 2] = tmp;
 				postOrderCalculation.erase(postOrderCalculation.begin() + formulaDigit - 1, postOrderCalculation.begin() + formulaDigit + 1);
@@ -515,8 +560,30 @@ double Calculate::CalculateAnsSingal(double x)
 
 				string tmp;
 				double a = 0, b = 0;
-				a = stod(postOrderCalculation[formulaDigit - 2]);
-				b = stod(postOrderCalculation[formulaDigit - 1]);
+
+				if (postOrderCalculation[formulaDigit - 2] == "x")
+				{
+					a = x;
+				}
+				else
+				{
+					a = stod(postOrderCalculation[formulaDigit - 2]);
+				}
+
+				if (postOrderCalculation[formulaDigit - 1] == "x")
+				{
+					b = x;
+					if (a == 0)
+					{
+						this->cError = 9;
+						return -1;
+					}
+				}
+				else
+				{
+					b = stod(postOrderCalculation[formulaDigit - 1]);
+				}
+
 				tmp = to_string(a / b);
 				postOrderCalculation[formulaDigit - 2] = tmp;
 				postOrderCalculation.erase(postOrderCalculation.begin() + formulaDigit - 1, postOrderCalculation.begin() + formulaDigit + 1);
@@ -535,8 +602,25 @@ double Calculate::CalculateAnsSingal(double x)
 			{
 				string tmp;
 				double a = 0, b = 0;
-				a = stod(postOrderCalculation[formulaDigit - 2]);
-				b = stod(postOrderCalculation[formulaDigit - 1]);
+
+				if (postOrderCalculation[formulaDigit - 2] == "x")
+				{
+					a = x;
+				}
+				else
+				{
+					a = stod(postOrderCalculation[formulaDigit - 2]);
+				}
+
+				if (postOrderCalculation[formulaDigit - 1] == "x")
+				{
+					b = x;
+				}
+				else
+				{
+					b = stod(postOrderCalculation[formulaDigit - 1]);
+				}
+
 				tmp = to_string(pow(a, b));
 				postOrderCalculation[formulaDigit - 2] = tmp;
 				postOrderCalculation.erase(postOrderCalculation.begin() + formulaDigit - 1, postOrderCalculation.begin() + formulaDigit + 1);
@@ -551,6 +635,9 @@ double Calculate::CalculateAnsSingal(double x)
 		// 階層
 		else if (postOrderCalculation[formulaDigit] == "!")
 		{
+			this->cError = 11;
+			return -1;
+
 			/*if (formulaDigit >= 1)
 			{
 				if (!(postOrderCalculation[formulaDigit - 1].denominator == "1") || postOrderCalculation[formulaDigit - 1].sign)
@@ -586,10 +673,17 @@ double Calculate::CalculateAnsSingal(double x)
 			if (formulaDigit >= 1)
 			{
 				string tmp = "-";
-				tmp += postOrderCalculation[formulaDigit - 1];
-				postOrderCalculation[formulaDigit - 1] = tmp;
-				postOrderCalculation.erase(postOrderCalculation.begin() + formulaDigit);
-				formulaDigit = 0;
+				if (postOrderCalculation[formulaDigit - 1][0] == '-')
+				{
+					postOrderCalculation[formulaDigit - 1].erase(0, 1);
+				}
+				else
+				{
+					tmp += postOrderCalculation[formulaDigit - 1];
+					postOrderCalculation[formulaDigit - 1] = tmp;
+					postOrderCalculation.erase(postOrderCalculation.begin() + formulaDigit);
+					formulaDigit = 0;
+				}
 			}
 			else
 			{
@@ -607,7 +701,12 @@ double Calculate::CalculateAnsSingal(double x)
 		this->cError = 10;
 		return -1;
 	}
-	
+
 	return stod(result);
 }
 
+// 獲取錯誤代碼
+int Calculate::GetCError()
+{
+	return this->cError;
+}

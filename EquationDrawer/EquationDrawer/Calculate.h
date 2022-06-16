@@ -4,6 +4,7 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
+#include "Pos.h"
 using namespace std;
 
 // 處裡運算式類別
@@ -13,8 +14,6 @@ public:
 	// 輸入運算式後，處理運算式(運算式不可有)
 	Calculate();
 	Calculate(string formula);
-	Calculate(string formula, double singalNum);
-	Calculate(string formula, double start, double end);
 
 	// 獲取初始運算式
 	string GetOriginFormula();
@@ -25,9 +24,22 @@ public:
 	int GetCError();
 
 	// 獲取運算式答案(單一數字點)
-	vector<double> GetAnsList(double singalNum);
+	vector<Pos> GetAnsList(double singalNum);
 	// 獲取運算式答案(連續數字串)
-	vector<double> GetAnsList(double start, double end);
+	vector<Pos> GetAnsList(double start, double end);
+
+
+private:
+	int cError;
+
+	string originFormula;
+	string processFormula;	// 內部用
+	vector<string> postOrderFormula;
+
+	vector<Pos> ansList;
+
+	// 計算數值(內部用)
+	double CalculateAnsSingal(double x);
 
 	// 計算方程式
 	void Calculation(string input);
@@ -39,18 +51,5 @@ public:
 	void CalculateAns(double x);
 	// 計算帶入數字的結果(範圍值)
 	void CalculateAns(double start, double end);
-
-
-private:
-	int cError;
-
-	string originFormula;
-	string processFormula;	// 內部用
-	vector<string> postOrderFormula;
-
-	vector<double> ansList;
-
-	// 計算數值(內部用)
-	double CalculateAnsSingal(double x);
 };
 
