@@ -46,7 +46,7 @@ public:
 
     void retranslateUi(QDialog *Dialog)
     {
-        Dialog->setWindowTitle(QCoreApplication::translate("Dialog", "Dialog", nullptr));
+        Dialog->setWindowTitle(QCoreApplication::translate("Dialog", "Input", nullptr));
         pushButton_Enter->setText(QCoreApplication::translate("Dialog", "\347\242\272\350\252\215", nullptr));
     } // retranslateUi
 
