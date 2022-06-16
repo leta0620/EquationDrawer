@@ -35,6 +35,8 @@ public:
 	vector<int> GetErrorList();
 	// 獲取要繪製的座標清單
 	vector<vector<Pos>> GetDrawList();
+	// 獲取可繪製的清單，對應到原始輸入的哪幾行
+	vector<int> GetColorList();
 
 
 private:
@@ -43,12 +45,6 @@ private:
 	vector<VariableItem> variableList;	// 變數清單
 
 	vector<vector<Pos>> drawList;	// 繪圖清單，裡面會放可繪製的座標清單
-
-	/*
-	a = 3
-	b = 3a + 5
-	y = ax
-	y = 3x - b
-	*/
+	vector<int> colorList;			// 可繪製的清單，對應到原始輸入的哪幾行
 };
 

@@ -35,6 +35,7 @@ public:
 
 private:
 	int cError;
+	bool runError;
 
 	string originFormula;
 	string processFormula;	// ¤º³¡¥Î
