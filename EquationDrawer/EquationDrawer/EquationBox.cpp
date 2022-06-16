@@ -12,11 +12,22 @@ EquationBox::EquationBox(QWidget* parent)
     selCol = QColor(0, 0, 0);
     QString temp = "background-color: " + selCol.name();
     ui.pushButton_Color->setStyleSheet(temp);
+
+    isVisible = true;
 }
 
 void EquationBox::on_pushButton_Visible_onclicked()
 {
-    ui.textEdit->setText("gg");
+    if (isVisible)
+    {
+        ui.pushButton_Visible->setText(QString::fromLocal8Bit("不可見"));
+        isVisible = false;
+    }
+    else
+    {
+        ui.pushButton_Visible->setText(QString::fromLocal8Bit("可見"));
+        isVisible = true;
+    }
 }
 
 void EquationBox::on_pushButton_Delete_onclicked()
@@ -54,4 +65,14 @@ void EquationBox::setError(int err)
     }
     else
         ui.label->setText(QString::number(err));
+}
+
+QColor EquationBox::getColor()
+{
+    return selCol;
+}
+
+bool EquationBox::getVisible()
+{
+    return isVisible;
 }

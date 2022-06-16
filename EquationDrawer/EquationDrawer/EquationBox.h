@@ -16,6 +16,7 @@ public:
     std::string GetEquation();
     QColor getColor();
     void setError(int);
+    bool getVisible();
 private slots:
     void on_pushButton_Visible_onclicked();
     void on_pushButton_Delete_onclicked();
@@ -25,6 +26,7 @@ private:
     QListWidgetItem* listItem;
     QColorDialog col;
     QColor selCol;
+    bool isVisible;
 signals:
     void sendDel(QListWidgetItem*);
 };

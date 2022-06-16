@@ -10,6 +10,7 @@ EquationDrawer::EquationDrawer(QWidget *parent)
 
     connect(ui.pushButton_Add, SIGNAL(clicked()), this, SLOT(on_pushButton_Add_onclicked()));
     connect(ui.pushButton_Draw, SIGNAL(clicked()), this, SLOT(on_pushButton_Draw_onclicked()));
+    connect(ui.pushButton_Back, SIGNAL(clicked()), this, SLOT(on_pushButton_Back_onclicked()));
     connect(&inp, SIGNAL(sendInput(QString)), this, SLOT(receiveInput(QString)));
 
     QSize temp = ui.graphicsView->viewport()->size();
@@ -27,6 +28,12 @@ void EquationDrawer::on_pushButton_Draw_onclicked()
 {
     center.setPos(0, 0);
     factor = 100;
+    paint();
+}
+
+void EquationDrawer::on_pushButton_Back_onclicked()
+{
+    center.setPos(0, 0);
     paint();
 }
 
@@ -289,16 +296,31 @@ void EquationDrawer::drawEquations()
         QPainterPath pathline;
         for (int b = 0; b < t[a].size(); b++)
         {
-            double x = (t[a][b].x - center.x) * factor + 400;
-            double y = 800 - ((t[a][b].y - center.y) * factor + 400);
-            pathline.lineTo(QPointF(x, y));
+            if (t[a][b].errorPos == false)
+            {
+                double x = (t[a][b].x - center.x) * factor + 400;
+                double y = 800 - ((t[a][b].y - center.y) * factor + 400);
+                pathline.lineTo(QPointF(x, y)); 
+            }
         }
 
         //QPainterPath painterPath;
         //painterPath.addPolygon(polyline);
         //QGraphicsPolygonItem* eqline = scene.addPolygon(polyline);
-        QGraphicsPathItem* eqline = scene.addPath(pathline);
-        scene.addItem(eqline);
-        //scene.addPolygon(polyline);
+        
+
+        int toDrawIndex = fun.GetColorList()[a];
+        QListWidgetItem* temp = ui.listWidget->item(toDrawIndex);
+        EquationBox* tBox = dynamic_cast<EquationBox*> (ui.listWidget->itemWidget(temp));
+
+        if(tBox->getVisible())
+        { 
+            QGraphicsPathItem* eqline = scene.addPath(pathline);
+            QPen pen;
+            pen.setColor(tBox->getColor());
+            eqline->setPen(pen);
+            scene.addItem(eqline);
+            //scene.addPolygon(polyline);
+        }
     }
 }
