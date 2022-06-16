@@ -25,6 +25,7 @@ public:
     QPushButton *pushButton_Delete;
     QTextEdit *textEdit;
     QLabel *label;
+    QPushButton *pushButton_Color;
 
     void setupUi(QWidget *Form)
     {
@@ -39,7 +40,7 @@ public:
         pushButton_Delete->setGeometry(QRect(310, 0, 41, 41));
         textEdit = new QTextEdit(Form);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(0, 0, 231, 41));
+        textEdit->setGeometry(QRect(0, 0, 191, 41));
         QFont font;
         font.setPointSize(18);
         textEdit->setFont(font);
@@ -50,6 +51,9 @@ public:
         font1.setPointSize(7);
         label->setFont(font1);
         label->setAlignment(Qt::AlignCenter);
+        pushButton_Color = new QPushButton(Form);
+        pushButton_Color->setObjectName(QString::fromUtf8("pushButton_Color"));
+        pushButton_Color->setGeometry(QRect(190, 0, 41, 41));
 
         retranslateUi(Form);
 
@@ -67,6 +71,7 @@ public:
 "</style></head><body style=\" font-family:'PMingLiU'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Test</p></body></html>", nullptr));
         label->setText(QCoreApplication::translate("Form", "No Error", nullptr));
+        pushButton_Color->setText(QCoreApplication::translate("Form", "\351\241\217\350\211\262", nullptr));
     } // retranslateUi
 
 };

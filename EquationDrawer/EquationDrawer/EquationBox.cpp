@@ -7,6 +7,11 @@ EquationBox::EquationBox(QWidget* parent)
 
     connect(ui.pushButton_Visible, SIGNAL(clicked()), this, SLOT(on_pushButton_Visible_onclicked()));
     connect(ui.pushButton_Delete, SIGNAL(clicked()), this, SLOT(on_pushButton_Delete_onclicked()));
+    connect(ui.pushButton_Color, SIGNAL(clicked()), this, SLOT(on_pushButton_Color_onclicked()));
+
+    selCol = QColor(0, 0, 0);
+    QString temp = "background-color: " + selCol.name();
+    ui.pushButton_Color->setStyleSheet(temp);
 }
 
 void EquationBox::on_pushButton_Visible_onclicked()
@@ -17,6 +22,13 @@ void EquationBox::on_pushButton_Visible_onclicked()
 void EquationBox::on_pushButton_Delete_onclicked()
 {
     emit sendDel(listItem);
+}
+
+void EquationBox::on_pushButton_Color_onclicked()
+{
+    selCol = col.getColor();
+    QString temp = "background-color: " + selCol.name();
+    ui.pushButton_Color->setStyleSheet(temp);
 }
 
 void EquationBox::SetListItem(QListWidgetItem* item)
@@ -34,4 +46,12 @@ std::string EquationBox::GetEquation()
     QString temp = ui.textEdit->toPlainText();
     return temp.toStdString();
 }
-
+void EquationBox::setError(int err)
+{
+    if (err == 0)
+    {
+        ui.label->setText("No Error");
+    }
+    else
+        ui.label->setText(QString::number(err));
+}

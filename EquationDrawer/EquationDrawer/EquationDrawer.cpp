@@ -277,4 +277,28 @@ void EquationDrawer::drawEquations()
     double lX = center.x - 400 / factor;
     double rX = center.x + 400 / factor;
     FuntionProcess fun(equs, lX, rX);
+    vector<vector<Pos>> t = fun.GetDrawList();        
+    for (int a = 0; a < ui.listWidget->count(); a++)
+    {
+        QListWidgetItem* temp = ui.listWidget->item(a);
+        EquationBox* tBox = dynamic_cast<EquationBox*> (ui.listWidget->itemWidget(temp));
+        tBox->setError(fun.GetErrorList()[a]);
+    }
+    for(int a=0;a<t.size();a++)
+    {
+        QPainterPath pathline;
+        for (int b = 0; b < t[a].size(); b++)
+        {
+            double x = (t[a][b].x - center.x) * factor + 400;
+            double y = 800 - ((t[a][b].y - center.y) * factor + 400);
+            pathline.lineTo(QPointF(x, y));
+        }
+
+        //QPainterPath painterPath;
+        //painterPath.addPolygon(polyline);
+        //QGraphicsPolygonItem* eqline = scene.addPolygon(polyline);
+        QGraphicsPathItem* eqline = scene.addPath(pathline);
+        scene.addItem(eqline);
+        //scene.addPolygon(polyline);
+    }
 }
