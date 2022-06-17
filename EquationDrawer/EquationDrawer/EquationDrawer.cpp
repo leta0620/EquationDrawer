@@ -5,7 +5,7 @@ EquationDrawer::EquationDrawer(QWidget *parent)
 {
     ui.setupUi(this);
 
-    center.setPos(2.5, 3.7);
+    center.setPos(0, 0);
     factor = 100;
 
     connect(ui.pushButton_Add, SIGNAL(clicked()), this, SLOT(on_pushButton_Add_onclicked()));
@@ -15,8 +15,12 @@ EquationDrawer::EquationDrawer(QWidget *parent)
 
     QSize temp = ui.graphicsView->viewport()->size();
     ui.textBrowser->setText(QString::number(temp.width()));
-    scene.setSceneRect(0, 0, 800, 800);
+    //scene.setSceneRect(0, 0, 800, 800);
+
     ui.graphicsView->viewport()->installEventFilter(this);
+    ui.graphicsView->setSceneRect(0, 0, 800, 800);
+    //ui.graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //ui.graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 void EquationDrawer::on_pushButton_Add_onclicked()
@@ -26,13 +30,25 @@ void EquationDrawer::on_pushButton_Add_onclicked()
 
 void EquationDrawer::on_pushButton_Draw_onclicked()
 {
-    center.setPos(0, 0);
-    factor = 100;
+    //center.setPos(0, 0);
+    //factor = 100;
     paint();
 }
 
 void EquationDrawer::on_pushButton_Back_onclicked()
 {
+    vector<string> equs;
+    for (int a = 0; a < ui.listWidget->count(); a++)
+    {
+        QListWidgetItem* temp = ui.listWidget->item(a);
+        EquationBox* tBox = dynamic_cast<EquationBox*> (ui.listWidget->itemWidget(temp));
+        equs.push_back(tBox->GetEquation());
+    }
+    double lX = center.x - 400 / factor;
+    double rX = center.x + 400 / factor;
+    FuntionProcess fun(equs, lX, rX);
+    vector<vector<Pos>> t = fun.GetDrawList();
+
     center.setPos(0, 0);
     paint();
 }
@@ -294,13 +310,45 @@ void EquationDrawer::drawEquations()
     for(int a=0;a<t.size();a++)
     {
         QPainterPath pathline;
+        double prevY = 999;
+        bool newline = true;
         for (int b = 0; b < t[a].size(); b++)
         {
             if (t[a][b].errorPos == false)
             {
                 double x = (t[a][b].x - center.x) * factor + 400;
-                double y = 800 - ((t[a][b].y - center.y) * factor + 400);
-                pathline.lineTo(QPointF(x, y)); 
+                double y = 800 - ((t[a][b].y - center.y) * factor + 400);                
+                if (y <= 800)
+                {
+                    if (newline)
+                    {
+                        pathline.moveTo(QPointF(x, y));
+                        newline = false;
+                    }
+                    else
+                    {
+                        pathline.lineTo(QPointF(x, y));
+                    }
+                }
+                else if (b < t[a].size() - 1)
+                {
+                    double nextY = 800 - ((t[a][b + 1].y - center.y) * factor + 400);
+                    if (prevY <= 800)
+                    {
+                        pathline.lineTo(QPointF(x, 800));
+                        newline = true;
+                    }
+                    if (nextY <= 800)
+                    {
+                        pathline.moveTo(QPointF(x, 800));
+                        newline = false;
+                    }
+                }
+                prevY = y;
+            }
+            else
+            {
+                newline = true;
             }
         }
 
@@ -308,7 +356,7 @@ void EquationDrawer::drawEquations()
         //painterPath.addPolygon(polyline);
         //QGraphicsPolygonItem* eqline = scene.addPolygon(polyline);
         
-
+        
         int toDrawIndex = fun.GetColorList()[a];
         QListWidgetItem* temp = ui.listWidget->item(toDrawIndex);
         EquationBox* tBox = dynamic_cast<EquationBox*> (ui.listWidget->itemWidget(temp));
