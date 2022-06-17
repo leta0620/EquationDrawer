@@ -234,6 +234,32 @@ void Calculate::CutInput()
 				tmp += this->processFormula[loc];
 			}
 
+			// 如果輸入是三角函數
+			if (tmp == "sin" || tmp == "cos" || tmp == "tan")
+			{
+				for (; this->processFormula[loc] != ')' && loc < this->processFormula.size(); loc++)
+				{
+					tmp += this->processFormula[loc];
+				}
+				if (loc < this->processFormula.size())
+				{
+					if (this->processFormula[loc] == ')')
+					{
+						tmp += this->processFormula[loc];
+						loc++;
+					}
+					else
+					{
+						this->cError = 15;
+						return;
+					}
+				}
+				else
+				{
+					this->cError = 15;
+					return;
+				}
+			}
 			cutString.push_back(tmp);
 			tmp.clear();
 		}
@@ -362,7 +388,7 @@ void Calculate::CutInput()
 
 	for (int round = 0; round < cutString.size(); round++)
 	{
-		// 若切割完的字串是數字 || 切割完的為負數 || 切割完的是變數
+		// 若切割完的字串是數字 || 切割完的為負數 || 切割完的是變數 || 切割完是三角函數
 		if ((cutString[round][0] >= '0' && cutString[round][0] <= '9') || (cutString[round][0] == '@' && cutString[round].size() > 1) || (cutString[round][0] >= 'A' && cutString[round][0] <= 'Z') || (cutString[round][0] >= 'a' && cutString[round][0] <= 'z'))
 		{
 			postfix.push_back(cutString[round]);
@@ -813,8 +839,116 @@ double Calculate::CalculateAnsSingal(double x)
 	vector<string> postOrderCalculation(this->postOrderFormula);
 	for (; postOrderCalculation.size() > 1 && formulaDigit < postOrderCalculation.size(); formulaDigit++)
 	{
+		// 三角函數
+		if (postOrderCalculation[formulaDigit].substr(0, 3) == "sin" || postOrderCalculation[formulaDigit].substr(0, 3) == "cos" || postOrderCalculation[formulaDigit].substr(0, 3) == "tan")
+		{
+			string tmp;
+			string triangle = postOrderCalculation[formulaDigit].substr(0, 3);
+			postOrderCalculation[formulaDigit].erase(0, 3);
+
+			// 進行錯誤判斷
+			// 括號錯誤
+			int start = 0, end = 0;
+			for (int checkSin = 0; checkSin < postOrderCalculation[formulaDigit].size(); checkSin++)
+			{
+				if (postOrderCalculation[formulaDigit][checkSin] == '(')
+				{
+					start++;
+				}
+				else if (postOrderCalculation[formulaDigit][checkSin] == ')')
+				{
+					end++;
+				}
+			}
+
+			// (X)長度<=2 || 前後括號數量不為1 || 首位不為'(' || 末位不為')'
+			if (postOrderCalculation[formulaDigit].size() <= 2 || start != 1 || end != 1 || postOrderCalculation[formulaDigit][0] != '(' || postOrderCalculation[formulaDigit][postOrderCalculation[formulaDigit].size() - 1] != ')')
+			{
+				this->cError = 15;
+				return -1;
+			}
+
+			// sin
+			if (triangle == "sin")
+			{
+				// 運算
+				postOrderCalculation[formulaDigit].erase(0, 1);
+				postOrderCalculation[formulaDigit].erase(postOrderCalculation[formulaDigit].end() - 1);
+
+				Calculate sinInNum(postOrderCalculation[formulaDigit]);
+
+				this->cError == sinInNum.cError;
+
+				if (this->cError == 0)
+				{
+					vector<Pos> inNum = sinInNum.GetAnsList(x);
+					this->cError == sinInNum.cError;
+
+					if (this->cError == 0 && !inNum.empty())
+					{
+						if (!inNum[0].errorPos)
+						{
+							tmp = to_string(sin(inNum[0].y));
+						}
+					}
+				}
+			}
+			// cos
+			else if (triangle == "cos")
+			{
+				// 運算
+				postOrderCalculation[formulaDigit].erase(0, 1);
+				postOrderCalculation[formulaDigit].erase(postOrderCalculation[formulaDigit].end() - 1);
+
+				Calculate cosInNum(postOrderCalculation[formulaDigit]);
+
+				this->cError == cosInNum.cError;
+
+				if (this->cError == 0)
+				{
+					vector<Pos> inNum = cosInNum.GetAnsList(x);
+					this->cError == cosInNum.cError;
+
+					if (this->cError == 0 && !inNum.empty())
+					{
+						if (!inNum[0].errorPos)
+						{
+							tmp = to_string(cos(inNum[0].y));
+						}
+					}
+				}
+			}
+			// tan
+			else if (triangle == "tan")
+			{
+				// 運算
+				postOrderCalculation[formulaDigit].erase(0, 1);
+				postOrderCalculation[formulaDigit].erase(postOrderCalculation[formulaDigit].end() - 1);
+
+				Calculate tanInNum(postOrderCalculation[formulaDigit]);
+
+				this->cError == tanInNum.cError;
+
+				if (this->cError == 0)
+				{
+					vector<Pos> inNum = tanInNum.GetAnsList(x);
+					this->cError == tanInNum.cError;
+
+					if (this->cError == 0 && !inNum.empty())
+					{
+						if (!inNum[0].errorPos)
+						{
+							tmp = to_string(tan(inNum[0].y));
+						}
+					}
+				}
+			}
+
+			postOrderCalculation[formulaDigit] = tmp;
+			formulaDigit = 0;
+		}
 		// 加法
-		if (postOrderCalculation[formulaDigit] == "+")
+		else if (postOrderCalculation[formulaDigit] == "+")
 		{
 			if (formulaDigit >= 2)
 			{
@@ -1174,35 +1308,144 @@ double Calculate::CalculateAnsSingal(double x)
 	}
 
 	// 計算結果
-	if (postOrderCalculation[0][0] == '@')
-	{
-		postOrderCalculation[0][0] = '-';
-	}
 
-	if (postOrderCalculation[0] == "x")
+	// 若結果是三角函數
+	if (postOrderCalculation.size() > 0)
 	{
-		postOrderCalculation[0] = to_string(x);
-	}
-	else if (postOrderCalculation[0] == "-x")
-	{
-		postOrderCalculation[0] = to_string(0 - x);
-	}
+		if (postOrderCalculation[0].substr(0, 3) == "sin" || postOrderCalculation[0].substr(0, 3) == "cos" || postOrderCalculation[0].substr(0, 3) == "tan")
+		{
+			string triangle = postOrderCalculation[0].substr(0, 3);
+			postOrderCalculation[0].erase(0, 3);
 
-	string result = postOrderCalculation[0];
+			// 進行錯誤判斷
+			// 括號錯誤
+			int start = 0, end = 0;
+			for (int checkSin = 0; checkSin < postOrderCalculation[0].size(); checkSin++)
+			{
+				if (postOrderCalculation[0][checkSin] == '(')
+				{
+					start++;
+				}
+				else if (postOrderCalculation[0][checkSin] == ')')
+				{
+					end++;
+				}
+			}
 
-	// 檢查是否有殘留運算元
-	if (postOrderCalculation.size() > 1 || !((result[0] >= '0' && result[0] <= '9') || result[0] == '-'))
-	{
-		this->cError = 10;
-		return -1;
+			// (X)長度<=2 || 前後括號數量不為1 || 首位不為'(' || 末位不為')'
+			if (postOrderCalculation[0].size() <= 2 || start != 1 || end != 1 || postOrderCalculation[0][0] != '(' || postOrderCalculation[0][postOrderCalculation[0].size() - 1] != ')')
+			{
+				this->cError = 15;
+				return -1;
+			}
+
+			// sin
+			if (triangle == "sin")
+			{
+				// 運算
+				postOrderCalculation[0].erase(0, 1);
+				postOrderCalculation[0].erase(postOrderCalculation[0].end() - 1);
+
+				Calculate sinInNum(postOrderCalculation[0]);
+
+				this->cError == sinInNum.cError;
+
+				if (this->cError == 0)
+				{
+					vector<Pos> inNum = sinInNum.GetAnsList(x);
+					this->cError == sinInNum.cError;
+
+					if (this->cError == 0 && !inNum.empty())
+					{
+						if (!inNum[0].errorPos)
+						{
+							postOrderCalculation[0] = to_string(sin(inNum[0].y));
+						}
+					}
+				}
+			}
+			// cos
+			else if (triangle == "cos")
+			{
+				// 運算
+				postOrderCalculation[0].erase(0, 1);
+				postOrderCalculation[0].erase(postOrderCalculation[0].end() - 1);
+
+				Calculate cosInNum(postOrderCalculation[0]);
+
+				this->cError == cosInNum.cError;
+
+				if (this->cError == 0)
+				{
+					vector<Pos> inNum = cosInNum.GetAnsList(x);
+					this->cError == cosInNum.cError;
+
+					if (this->cError == 0 && !inNum.empty())
+					{
+						if (!inNum[0].errorPos)
+						{
+							postOrderCalculation[0] = to_string(cos(inNum[0].y));
+						}
+					}
+				}
+			}
+			// tan
+			else if (triangle == "tan")
+			{
+				// 運算
+				postOrderCalculation[0].erase(0, 1);
+				postOrderCalculation[0].erase(postOrderCalculation[0].end() - 1);
+
+				Calculate tanInNum(postOrderCalculation[0]);
+
+				this->cError == tanInNum.cError;
+
+				if (this->cError == 0)
+				{
+					vector<Pos> inNum = tanInNum.GetAnsList(x);
+					this->cError == tanInNum.cError;
+
+					if (this->cError == 0 && !inNum.empty())
+					{
+						if (!inNum[0].errorPos)
+						{
+							postOrderCalculation[0] = to_string(tan(inNum[0].y));
+						}
+					}
+				}
+			}
+		}
+
+		// 若結果為負數的處理
+		if (postOrderCalculation[0][0] == '@')
+		{
+			postOrderCalculation[0][0] = '-';
+		}
+
+		if (postOrderCalculation[0] == "x")
+		{
+			postOrderCalculation[0] = to_string(x);
+		}
+		else if (postOrderCalculation[0] == "-x")
+		{
+			postOrderCalculation[0] = to_string(0 - x);
+		}
+
+		string result = postOrderCalculation[0];
+
+		// 檢查是否有殘留運算元
+		if (postOrderCalculation.size() > 1 || !((result[0] >= '0' && result[0] <= '9') || result[0] == '-'))
+		{
+			this->cError = 10;
+			return -1;
+		}
+
+		if (this->cError != 0)
+		{
+			runError = true;
+			this->cError = 0;
+		}
+
+		return stod(result);
 	}
-
-	if (this->cError != 0)
-	{
-		runError = true;
-		this->cError = 0;
-	}
-
-	return stod(result);
 }
-

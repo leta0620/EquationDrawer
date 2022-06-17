@@ -48,7 +48,7 @@ private:
 
 	// 計算方程式
 	void Calculation(string input);
-	// 初步處理輸入
+	// 初步處理輸入，將不合格的輸入文字找出來
 	void SetInput(string input);
 	// 切割並轉為後序
 	void CutInput();

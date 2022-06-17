@@ -150,8 +150,6 @@ void FuntionProcess::InputProcess(vector<string> iniInputList)
 								this->variableList.push_back(newVariable);
 							}
 						}
-
-
 					}
 					// ¿ù»~
 					else if (errorVariableName == true || hasEqual == false)
@@ -194,7 +192,7 @@ void FuntionProcess::CalculateAllFuntion(double start, double end)
 				string checkStr = tmp.GetPostOrderFormula()[checkV];
 				if (!(checkStr[0] >= '0' && checkStr[0] <= '9'))
 				{
-					if (!(checkStr[0] == 'x' || checkStr[0] == '+' || checkStr[0] == '-' || checkStr[0] == '*' || checkStr[0] == '/' || checkStr[0] == '@' || checkStr[0] == '^'))
+					if (!(checkStr[0] == 'x' || checkStr[0] == '+' || checkStr[0] == '-' || checkStr[0] == '*' || checkStr[0] == '/' || checkStr[0] == '@' || checkStr[0] == '^' || checkStr.substr(0, 4) == "sin(" || checkStr.substr(0, 4) == "cos(" || checkStr.substr(0, 4) == "tan("))
 					{
 						this->inputList[round].errorType = 13;
 						break;

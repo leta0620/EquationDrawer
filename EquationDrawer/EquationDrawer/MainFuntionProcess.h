@@ -24,7 +24,7 @@ public:
 	FuntionProcess(vector<string> iniInputList);
 	FuntionProcess(vector<string> iniInputList, double start, double end);
 
-	// 處理輸入
+	// 處理輸入，分辨是方程式還是變數
 	void InputProcess(vector<string> iniInputList);
 
 	// 給定範圍進行計算
