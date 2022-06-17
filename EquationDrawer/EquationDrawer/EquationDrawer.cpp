@@ -30,8 +30,8 @@ void EquationDrawer::on_pushButton_Add_onclicked()
 
 void EquationDrawer::on_pushButton_Draw_onclicked()
 {
-    //center.setPos(0, 0);
-    //factor = 100;
+    center.setPos(0, 0);
+    factor = 100;
     paint();
 }
 
@@ -333,12 +333,12 @@ void EquationDrawer::drawEquations()
                 else if (b < t[a].size() - 1)
                 {
                     double nextY = 800 - ((t[a][b + 1].y - center.y) * factor + 400);
-                    if (prevY <= 800)
+                    if (prevY <= 800 && prevY >= 0)
                     {
                         pathline.lineTo(QPointF(x, 800));
                         newline = true;
                     }
-                    if (nextY <= 800)
+                    if (nextY <= 800 && nextY >= 0)
                     {
                         pathline.moveTo(QPointF(x, 800));
                         newline = false;
