@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>351</width>
+    <width>531</width>
     <height>41</height>
    </rect>
   </property>
@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="pushButton_Visible">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>450</x>
      <y>0</y>
      <width>41</width>
      <height>41</height>
@@ -29,7 +29,7 @@
   <widget class="QPushButton" name="pushButton_Delete">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>490</x>
      <y>0</y>
      <width>41</width>
      <height>41</height>
@@ -44,7 +44,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>191</width>
+     <width>371</width>
      <height>41</height>
     </rect>
    </property>
@@ -64,7 +64,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>410</x>
      <y>0</y>
      <width>41</width>
      <height>41</height>
@@ -85,7 +85,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QPushButton" name="pushButton_Color">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>370</x>
      <y>0</y>
      <width>41</width>
      <height>41</height>
