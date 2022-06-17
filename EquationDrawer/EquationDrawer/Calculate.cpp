@@ -486,7 +486,7 @@ void Calculate::CalculateAns(double start, double end)
 	vector<Pos> tmpVector;
 	for (int ansRound = 0; ansRound < calculateTimes; ansRound++)
 	{
-		double x = start + (ansRound * ((end - start) / 800));
+		double x = start + (ansRound * ((end - start) / calculateTimes));
 		Pos tmp;
 
 		double ans = this->CalculateAnsSingal(x);
@@ -499,9 +499,14 @@ void Calculate::CalculateAns(double start, double end)
 				tmp.SetErrorPos(true);
 				this->runError = false;
 			}
-
-			this->ansList.push_back(tmp);
 		}
+		else
+		{
+			tmp.setPos(x, ans);
+			tmp.errorPos = true;
+		}
+
+		this->ansList.push_back(tmp);
 	}
 }
 
@@ -877,12 +882,13 @@ double Calculate::CalculateAnsSingal(double x)
 
 				Calculate sinInNum(postOrderCalculation[formulaDigit]);
 
-				this->cError == sinInNum.cError;
+				this->cError = sinInNum.cError;
 
 				if (this->cError == 0)
 				{
 					vector<Pos> inNum = sinInNum.GetAnsList(x);
-					this->cError == sinInNum.cError;
+
+					this->cError = sinInNum.cError;
 
 					if (this->cError == 0 && !inNum.empty())
 					{
@@ -902,12 +908,13 @@ double Calculate::CalculateAnsSingal(double x)
 
 				Calculate cosInNum(postOrderCalculation[formulaDigit]);
 
-				this->cError == cosInNum.cError;
+				this->cError = cosInNum.cError;
 
 				if (this->cError == 0)
 				{
 					vector<Pos> inNum = cosInNum.GetAnsList(x);
-					this->cError == cosInNum.cError;
+
+					this->cError = cosInNum.cError;
 
 					if (this->cError == 0 && !inNum.empty())
 					{
@@ -927,12 +934,13 @@ double Calculate::CalculateAnsSingal(double x)
 
 				Calculate tanInNum(postOrderCalculation[formulaDigit]);
 
-				this->cError == tanInNum.cError;
+				this->cError = tanInNum.cError;
 
 				if (this->cError == 0)
 				{
 					vector<Pos> inNum = tanInNum.GetAnsList(x);
-					this->cError == tanInNum.cError;
+
+					this->cError = tanInNum.cError;
 
 					if (this->cError == 0 && !inNum.empty())
 					{
@@ -1209,54 +1217,12 @@ double Calculate::CalculateAnsSingal(double x)
 					b = stod(postOrderCalculation[formulaDigit - 1]);
 				}
 
-				// 次方運算判斷
-
-				if (b == 0)
+				// 次方運算計算
+				tmp = to_string(pow(a, b));
+				if (tmp == "-nan(ind)")
 				{
-					tmp = "1";
-				}
-				else if (a >= 0 && b > 0)
-				{
-					tmp = to_string(pow(a, b));
-				}
-				else if (a >= 0 && b < 0)
-				{
-					b = 0 - b;
-					double ans = pow(a, b);
-					ans = 1 / ans;
-					tmp = to_string(ans);
-				}
-				else if (a < 0 && b < 0)
-				{
-					if ((int)b == b)
-					{
-						a = 0 - a;
-						b = 0 - b;
-						double ans = pow(a, b);
-						ans = 1 / ans;
-
-						if ((int)b % 2 == 1)
-						{
-							tmp = "-";
-						}
-						tmp += to_string(ans);
-					}
-					else
-					{
-						this->cError = 10;
-						return -1;
-					}
-				}
-				else if (a < 0 && b > 0)
-				{
-					a = 0 - a;
-					double ans = pow(a, b);
-
-					if ((int)b % 2 == 1)
-					{
-						tmp = "-";
-					}
-					tmp += to_string(ans);
+					this->cError = 10;
+					return -1;
 				}
 
 				postOrderCalculation[formulaDigit - 2] = tmp;
