@@ -1,1 +1,19 @@
-﻿  EquationDrawer.vcxproj -> D:\my works\EquationDrawer\EquationDrawer\x64\Debug\EquationDrawer.exe
+﻿  Reading Qt configuration (K:/QT/5.15.2/msvc2019_64/bin/qmake)
+  Calculate.cpp
+  EquationBox.cpp
+  EquationDrawer.cpp
+  Input.cpp
+  MainFuntionProcess.cpp
+  main.cpp
+D:\OOP project\EquationDrawer\git_test\EquationDrawer\EquationDrawer\EquationDrawer\Calculate.cpp(1317,18): warning C4553: '==': result of expression not used; did you intend '='?
+D:\OOP project\EquationDrawer\git_test\EquationDrawer\EquationDrawer\EquationDrawer\Calculate.cpp(1322,19): warning C4553: '==': result of expression not used; did you intend '='?
+D:\OOP project\EquationDrawer\git_test\EquationDrawer\EquationDrawer\EquationDrawer\Calculate.cpp(1342,18): warning C4553: '==': result of expression not used; did you intend '='?
+D:\OOP project\EquationDrawer\git_test\EquationDrawer\EquationDrawer\EquationDrawer\Calculate.cpp(1347,19): warning C4553: '==': result of expression not used; did you intend '='?
+D:\OOP project\EquationDrawer\git_test\EquationDrawer\EquationDrawer\EquationDrawer\Calculate.cpp(1367,18): warning C4553: '==': result of expression not used; did you intend '='?
+D:\OOP project\EquationDrawer\git_test\EquationDrawer\EquationDrawer\EquationDrawer\Calculate.cpp(1372,19): warning C4553: '==': result of expression not used; did you intend '='?
+D:\OOP project\EquationDrawer\git_test\EquationDrawer\EquationDrawer\EquationDrawer\Calculate.cpp(1417): warning C4715: 'Calculate::CalculateAnsSingal': not all control paths return a value
+  qrc_EquationDrawer.cpp
+  moc_EquationBox.cpp
+  moc_EquationDrawer.cpp
+  moc_Input.cpp
+  EquationDrawer.vcxproj -> D:\OOP project\EquationDrawer\git_test\EquationDrawer\EquationDrawer\x64\Debug\EquationDrawer.exe
