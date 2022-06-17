@@ -33,25 +33,25 @@ public:
     {
         if (EquationDrawerClass->objectName().isEmpty())
             EquationDrawerClass->setObjectName(QString::fromUtf8("EquationDrawerClass"));
-        EquationDrawerClass->resize(1200, 810);
+        EquationDrawerClass->resize(1400, 810);
         listWidget = new QListWidget(EquationDrawerClass);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
-        listWidget->setGeometry(QRect(840, 90, 351, 541));
+        listWidget->setGeometry(QRect(840, 90, 531, 541));
         pushButton_Draw = new QPushButton(EquationDrawerClass);
         pushButton_Draw->setObjectName(QString::fromUtf8("pushButton_Draw"));
-        pushButton_Draw->setGeometry(QRect(1040, 720, 141, 61));
+        pushButton_Draw->setGeometry(QRect(1160, 720, 141, 61));
         QFont font;
         font.setPointSize(18);
         pushButton_Draw->setFont(font);
         pushButton_Add = new QPushButton(EquationDrawerClass);
         pushButton_Add->setObjectName(QString::fromUtf8("pushButton_Add"));
-        pushButton_Add->setGeometry(QRect(840, 10, 351, 71));
+        pushButton_Add->setGeometry(QRect(840, 10, 531, 71));
         QFont font1;
         font1.setPointSize(30);
         pushButton_Add->setFont(font1);
         textBrowser = new QTextBrowser(EquationDrawerClass);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
-        textBrowser->setGeometry(QRect(840, 640, 351, 61));
+        textBrowser->setGeometry(QRect(840, 640, 531, 61));
         QFont font2;
         font2.setPointSize(16);
         textBrowser->setFont(font2);
@@ -62,7 +62,7 @@ public:
         graphicsView->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         pushButton_Back = new QPushButton(EquationDrawerClass);
         pushButton_Back->setObjectName(QString::fromUtf8("pushButton_Back"));
-        pushButton_Back->setGeometry(QRect(850, 720, 141, 61));
+        pushButton_Back->setGeometry(QRect(920, 720, 141, 61));
         pushButton_Back->setFont(font);
 
         retranslateUi(EquationDrawerClass);

@@ -31,29 +31,29 @@ public:
     {
         if (Form->objectName().isEmpty())
             Form->setObjectName(QString::fromUtf8("Form"));
-        Form->resize(351, 41);
+        Form->resize(531, 41);
         pushButton_Visible = new QPushButton(Form);
         pushButton_Visible->setObjectName(QString::fromUtf8("pushButton_Visible"));
-        pushButton_Visible->setGeometry(QRect(270, 0, 41, 41));
+        pushButton_Visible->setGeometry(QRect(450, 0, 41, 41));
         pushButton_Delete = new QPushButton(Form);
         pushButton_Delete->setObjectName(QString::fromUtf8("pushButton_Delete"));
-        pushButton_Delete->setGeometry(QRect(310, 0, 41, 41));
+        pushButton_Delete->setGeometry(QRect(490, 0, 41, 41));
         textEdit = new QTextEdit(Form);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(0, 0, 191, 41));
+        textEdit->setGeometry(QRect(0, 0, 371, 41));
         QFont font;
         font.setPointSize(18);
         textEdit->setFont(font);
         label = new QLabel(Form);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(230, 0, 41, 41));
+        label->setGeometry(QRect(410, 0, 41, 41));
         QFont font1;
         font1.setPointSize(7);
         label->setFont(font1);
         label->setAlignment(Qt::AlignCenter);
         pushButton_Color = new QPushButton(Form);
         pushButton_Color->setObjectName(QString::fromUtf8("pushButton_Color"));
-        pushButton_Color->setGeometry(QRect(190, 0, 41, 41));
+        pushButton_Color->setGeometry(QRect(370, 0, 41, 41));
 
         retranslateUi(Form);
 
