@@ -14,13 +14,9 @@ EquationDrawer::EquationDrawer(QWidget *parent)
     connect(&inp, SIGNAL(sendInput(QString)), this, SLOT(receiveInput(QString)));
 
     QSize temp = ui.graphicsView->viewport()->size();
-    ui.textBrowser->setText(QString::number(temp.width()));
-    //scene.setSceneRect(0, 0, 800, 800);
 
     ui.graphicsView->viewport()->installEventFilter(this);
     ui.graphicsView->setSceneRect(0, 0, 800, 800);
-    //ui.graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //ui.graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 void EquationDrawer::on_pushButton_Add_onclicked()
@@ -58,6 +54,7 @@ void EquationDrawer::receiveDel(QListWidgetItem* toDelete)
     QListWidgetItem* item = toDelete;
     ui.listWidget->removeItemWidget(item);
     delete item;
+    paint();
 }
 
 void EquationDrawer::receiveInput(QString toInput)
@@ -68,13 +65,14 @@ void EquationDrawer::receiveInput(QString toInput)
     itemWidget->SetListItem(item);
     itemWidget->SetEquation(toInput);
     connect(itemWidget, SIGNAL(sendDel(QListWidgetItem*)), this, SLOT(receiveDel(QListWidgetItem*)));
+    connect(itemWidget, SIGNAL(reDraw()), this, SLOT(paint()));
 
-    item->setSizeHint(QSize(301, 41));
+    item->setSizeHint(QSize(521, 41));
 
     ui.listWidget->addItem(item);
     ui.listWidget->setItemWidget(item, itemWidget);
-    ui.textBrowser->setText(QString::number(ui.listWidget->count()));
     inp.close();
+    paint();
 }
 
 //事件過濾器
@@ -86,7 +84,6 @@ bool EquationDrawer::eventFilter(QObject* obj, QEvent* eve)
         QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(eve);
         QString temp = QString::number(mouseEvent->x()) + " " + QString::number(mouseEvent->y()) + " ";
         clickPos = mouseEvent->pos();
-        ui.textBrowser->setText(temp);
         return true;
     }
     else if (eve->type() == QEvent::MouseMove)
@@ -122,7 +119,6 @@ bool EquationDrawer::eventFilter(QObject* obj, QEvent* eve)
 
         paint();
         QString t = QString::number(center.x) + " , " + QString::number(center.y) + " factor: " + QString::number(factor);
-        ui.textBrowser->setText(t);
         return true;
     }
     else
