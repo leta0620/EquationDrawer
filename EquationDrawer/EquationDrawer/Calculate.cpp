@@ -116,7 +116,7 @@ void Calculate::SetInput(string input)
 {
 	if (input.size() > 0)
 	{
-		if (!(input[0] == '-' || input[0] == '(' || (input[0] >= 'A' && input[0] <= 'Z') || (input[0] >= 'a' && input[0] <= 'z') || (input[0] >= '0' && input[0] <= '9')))
+		if (!(input[0] == '-' || input[0] == '(' || (input[0] >= 'A' && input[0] <= 'Z') || (input[0] >= 'a' && input[0] <= 'z') || (input[0] >= '0' && input[0] <= '9' || input[0] == '@')))
 		{
 			this->cError = 1;
 			return;
@@ -125,7 +125,7 @@ void Calculate::SetInput(string input)
 
 	for (int i = 0; i < input.size(); i++)
 	{
-		if (!((input[i] >= 'A' && input[i] <= 'Z') || (input[i] >= 'a' && input[i] <= 'z') || (input[i] >= '0' && input[i] <= '9') || input[i] == '.' || input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/' || input[i] == '!' || input[i] == '.' || input[i] == '^' || input[i] == '(' || input[i] == ')'))
+		if (!((input[i] >= 'A' && input[i] <= 'Z') || (input[i] >= 'a' && input[i] <= 'z') || (input[i] >= '0' && input[i] <= '9') || input[i] == '.' || input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/' || input[i] == '!' || input[i] == '.' || input[i] == '^' || input[i] == '(' || input[i] == ')' || input[0] == '@'))
 		{
 			this->cError = 1;
 			break;
