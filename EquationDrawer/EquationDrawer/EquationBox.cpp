@@ -14,6 +14,8 @@ EquationBox::EquationBox(QWidget* parent)
     ui.pushButton_Color->setStyleSheet(temp);
 
     isVisible = true;
+
+    ui.textEdit->installEventFilter(this);
 }
 
 void EquationBox::on_pushButton_Visible_onclicked()
@@ -28,6 +30,7 @@ void EquationBox::on_pushButton_Visible_onclicked()
         ui.pushButton_Visible->setText(QString::fromLocal8Bit("可見"));
         isVisible = true;
     }
+    emit reDraw();
 }
 
 void EquationBox::on_pushButton_Delete_onclicked()
@@ -40,6 +43,7 @@ void EquationBox::on_pushButton_Color_onclicked()
     selCol = col.getColor();
     QString temp = "background-color: " + selCol.name();
     ui.pushButton_Color->setStyleSheet(temp);
+    emit reDraw();
 }
 
 void EquationBox::SetListItem(QListWidgetItem* item)
@@ -64,7 +68,7 @@ void EquationBox::setError(int err)
         ui.label->setText("No Error");
     }
     else
-        ui.label->setText(QString::number(err));
+        ui.label->setText("Error!");
 }
 
 QColor EquationBox::getColor()
@@ -75,4 +79,28 @@ QColor EquationBox::getColor()
 bool EquationBox::getVisible()
 {
     return isVisible;
+}
+
+bool EquationBox::eventFilter(QObject* obj, QEvent* eve)
+{
+    if (eve->type() == QEvent::KeyPress)
+    {
+        //若事件為按鍵 將事件轉換為按鍵事件
+        QKeyEvent* keyEvent = static_cast<QKeyEvent*>(eve);
+
+        //檢查是否按下ENTER(兩個ENTER都算)
+        if (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter)
+        {
+            emit reDraw();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return QWidget::eventFilter(obj, eve);
+    }
 }

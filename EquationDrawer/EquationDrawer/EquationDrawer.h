@@ -27,10 +27,10 @@ private slots:
     void on_pushButton_Back_onclicked();
     void receiveDel(QListWidgetItem*);
     void receiveInput(QString);
+    void paint();
 private:
     Ui::EquationDrawerClass ui;
     bool eventFilter(QObject* obj, QEvent* eve);
-    void paint();
     void drawLines();
     void drawEquations();
     QGraphicsScene scene;
