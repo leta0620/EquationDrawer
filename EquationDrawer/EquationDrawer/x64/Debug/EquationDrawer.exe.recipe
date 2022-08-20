@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD
       <FullPath>D:\OOP project\EquationDrawer\git\EquationDrawer\x64\Debug\EquationDrawer.exe</FullPath>
+=======
+      <FullPath>D:\my works\EquationDrawer\EquationDrawer\x64\Debug\EquationDrawer.exe</FullPath>
+>>>>>>> bdabd4533fbff351d43e4501a2222e67c7ada135
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

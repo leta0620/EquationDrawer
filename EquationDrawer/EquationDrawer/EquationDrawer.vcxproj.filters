@@ -40,6 +40,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="MainFuntionProcess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -47,10 +48,17 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Calculate.cpp">
+=======
+    <ClCompile Include="EquationBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+>>>>>>> bdabd4533fbff351d43e4501a2222e67c7ada135
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="MainFuntionProcess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -58,6 +66,25 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Calculate.h">
+=======
+    <QtUic Include="EquationBox.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Input.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="EquationBox.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Input.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Pos.h">
+>>>>>>> bdabd4533fbff351d43e4501a2222e67c7ada135
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
