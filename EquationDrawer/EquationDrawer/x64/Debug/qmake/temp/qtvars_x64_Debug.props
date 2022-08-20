@@ -1,7 +1,15 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
 <Qt_DEFINES_>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB</Qt_DEFINES_>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<Qt_INCLUDEPATH_>"D:\OOP project\EquationDrawer\git\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp";K:\QT\5.15.2\msvc2019_64\include;K:\QT\5.15.2\msvc2019_64\include\QtWidgets;K:\QT\5.15.2\msvc2019_64\include\QtGui;K:\QT\5.15.2\msvc2019_64\include\QtANGLE;K:\QT\5.15.2\msvc2019_64\include\QtCore;"D:\OOP project\EquationDrawer\git\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp";/include;K:\QT\5.15.2\msvc2019_64\mkspecs\win32-msvc</Qt_INCLUDEPATH_>
+=======
+<Qt_INCLUDEPATH_>"D:\my works\EquationDrawer\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp";D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtWidgets;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtGui;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtANGLE;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtCore;"D:\my works\EquationDrawer\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp";/include;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc</Qt_INCLUDEPATH_>
+>>>>>>> bdabd4533fbff351d43e4501a2222e67c7ada135
+=======
 <Qt_INCLUDEPATH_>"D:\my works\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp";D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtWidgets;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtGui;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtANGLE;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtCore;"D:\my works\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp";/include;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc</Qt_INCLUDEPATH_>
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 <Qt_STDCPP_></Qt_STDCPP_>
 <Qt_CL_OPTIONS_>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus</Qt_CL_OPTIONS_>
 <Qt_LIBS_>D:\goombathings\utility\Qt\5.15.2\msvc2019_64\lib\Qt5Widgetsd.lib;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\lib\Qt5Guid.lib;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\lib\Qt5Cored.lib;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\lib\qtmaind.lib;shell32.lib</Qt_LIBS_>

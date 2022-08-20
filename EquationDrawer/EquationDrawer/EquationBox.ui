@@ -6,7 +6,11 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
+    <width>351</width>
+=======
     <width>531</width>
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
     <height>41</height>
    </rect>
   </property>
@@ -16,7 +20,11 @@
   <widget class="QPushButton" name="pushButton_Visible">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
+     <x>270</x>
+=======
      <x>450</x>
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
      <y>0</y>
      <width>41</width>
      <height>41</height>
@@ -29,7 +37,11 @@
   <widget class="QPushButton" name="pushButton_Delete">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
+     <x>310</x>
+=======
      <x>490</x>
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
      <y>0</y>
      <width>41</width>
      <height>41</height>
@@ -44,7 +56,11 @@
     <rect>
      <x>0</x>
      <y>0</y>
+<<<<<<< HEAD
+     <width>271</width>
+=======
      <width>371</width>
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
      <height>41</height>
     </rect>
    </property>
@@ -61,6 +77,8 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Test&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
+<<<<<<< HEAD
+=======
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -95,6 +113,7 @@ p, li { white-space: pre-wrap; }
     <string>顏色</string>
    </property>
   </widget>
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
  </widget>
  <resources/>
  <connections/>

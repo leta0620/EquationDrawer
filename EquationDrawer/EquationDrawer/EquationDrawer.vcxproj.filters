@@ -40,20 +40,48 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <ClCompile Include="MainFuntionProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Calculate.cpp">
+=======
+=======
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
     <ClCompile Include="EquationBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
+<<<<<<< HEAD
+>>>>>>> bdabd4533fbff351d43e4501a2222e67c7ada135
+=======
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Calculate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainFuntionProcess.cpp">
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <ClInclude Include="MainFuntionProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Calculate.h">
+=======
+=======
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
     <QtUic Include="EquationBox.ui">
       <Filter>Form Files</Filter>
     </QtUic>
@@ -71,12 +99,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pos.h">
+<<<<<<< HEAD
+>>>>>>> bdabd4533fbff351d43e4501a2222e67c7ada135
+=======
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Calculate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MainFuntionProcess.h">
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

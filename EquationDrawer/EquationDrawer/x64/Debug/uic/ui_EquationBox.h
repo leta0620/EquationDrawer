@@ -11,7 +11,10 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+<<<<<<< HEAD
+=======
 #include <QtWidgets/QLabel>
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
@@ -24,13 +27,31 @@ public:
     QPushButton *pushButton_Visible;
     QPushButton *pushButton_Delete;
     QTextEdit *textEdit;
+<<<<<<< HEAD
+=======
     QLabel *label;
     QPushButton *pushButton_Color;
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 
     void setupUi(QWidget *Form)
     {
         if (Form->objectName().isEmpty())
             Form->setObjectName(QString::fromUtf8("Form"));
+<<<<<<< HEAD
+        Form->resize(351, 41);
+        pushButton_Visible = new QPushButton(Form);
+        pushButton_Visible->setObjectName(QString::fromUtf8("pushButton_Visible"));
+        pushButton_Visible->setGeometry(QRect(270, 0, 41, 41));
+        pushButton_Delete = new QPushButton(Form);
+        pushButton_Delete->setObjectName(QString::fromUtf8("pushButton_Delete"));
+        pushButton_Delete->setGeometry(QRect(310, 0, 41, 41));
+        textEdit = new QTextEdit(Form);
+        textEdit->setObjectName(QString::fromUtf8("textEdit"));
+        textEdit->setGeometry(QRect(0, 0, 271, 41));
+        QFont font;
+        font.setPointSize(18);
+        textEdit->setFont(font);
+=======
         Form->resize(531, 41);
         pushButton_Visible = new QPushButton(Form);
         pushButton_Visible->setObjectName(QString::fromUtf8("pushButton_Visible"));
@@ -54,6 +75,7 @@ public:
         pushButton_Color = new QPushButton(Form);
         pushButton_Color->setObjectName(QString::fromUtf8("pushButton_Color"));
         pushButton_Color->setGeometry(QRect(370, 0, 41, 41));
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 
         retranslateUi(Form);
 
@@ -70,8 +92,11 @@ public:
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'PMingLiU'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Test</p></body></html>", nullptr));
+<<<<<<< HEAD
+=======
         label->setText(QCoreApplication::translate("Form", "No Error", nullptr));
         pushButton_Color->setText(QCoreApplication::translate("Form", "\351\241\217\350\211\262", nullptr));
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
     } // retranslateUi
 
 };

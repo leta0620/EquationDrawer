@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
+<<<<<<< HEAD
+   <string>Dialog</string>
+=======
    <string>Input</string>
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
   </property>
   <widget class="QPushButton" name="pushButton_Enter">
    <property name="geometry">

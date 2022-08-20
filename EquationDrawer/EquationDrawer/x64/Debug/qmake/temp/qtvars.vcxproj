@@ -33,7 +33,15 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">
     <ClCompile>
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <AdditionalIncludeDirectories>&quot;D:\OOP project\EquationDrawer\git\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp&quot;;K:\QT\5.15.2\msvc2019_64\include;K:\QT\5.15.2\msvc2019_64\include\QtWidgets;K:\QT\5.15.2\msvc2019_64\include\QtGui;K:\QT\5.15.2\msvc2019_64\include\QtANGLE;K:\QT\5.15.2\msvc2019_64\include\QtCore;&quot;D:\OOP project\EquationDrawer\git\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp&quot;;/include;K:\QT\5.15.2\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+=======
+      <AdditionalIncludeDirectories>&quot;D:\my works\EquationDrawer\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp&quot;;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtWidgets;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtGui;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtANGLE;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtCore;&quot;D:\my works\EquationDrawer\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp&quot;;/include;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+>>>>>>> bdabd4533fbff351d43e4501a2222e67c7ada135
+=======
       <AdditionalIncludeDirectories>&quot;D:\my works\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp&quot;;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtWidgets;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtGui;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtANGLE;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\include\QtCore;&quot;D:\my works\EquationDrawer\EquationDrawer\x64\Debug\qmake\temp&quot;;/include;D:\goombathings\utility\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
       <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>.\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
