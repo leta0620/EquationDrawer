@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿  Reading Qt configuration (K:/QT/5.15.2/msvc2019_64/bin/qmake)
   MainFuntionProcess.cpp
   EquationDrawer.vcxproj -> D:\OOP project\EquationDrawer\git\EquationDrawer\x64\Debug\EquationDrawer.exe
@@ -7,3 +8,8 @@
   EquationDrawer.cpp
   EquationDrawer.vcxproj -> D:\my works\EquationDrawer\EquationDrawer\x64\Debug\EquationDrawer.exe
 >>>>>>> bdabd4533fbff351d43e4501a2222e67c7ada135
+=======
+﻿  EquationDrawer.cpp
+  moc_EquationDrawer.cpp
+  EquationDrawer.vcxproj -> D:\my works\T\EquationDrawer\x64\Debug\EquationDrawer.exe
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc

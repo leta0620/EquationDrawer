@@ -3,10 +3,14 @@
   <ProjectOutputs>
     <ProjectOutput>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <FullPath>D:\OOP project\EquationDrawer\git\EquationDrawer\x64\Debug\EquationDrawer.exe</FullPath>
 =======
       <FullPath>D:\my works\EquationDrawer\EquationDrawer\x64\Debug\EquationDrawer.exe</FullPath>
 >>>>>>> bdabd4533fbff351d43e4501a2222e67c7ada135
+=======
+      <FullPath>D:\my works\T\EquationDrawer\x64\Debug\EquationDrawer.exe</FullPath>
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

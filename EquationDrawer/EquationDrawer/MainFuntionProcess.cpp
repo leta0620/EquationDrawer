@@ -1,5 +1,10 @@
 #include "MainFuntionProcess.h"
 
+<<<<<<< HEAD
+=======
+//-----------FuntionProcess-----------//
+
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 // 初始化
 FuntionProcess::FuntionProcess()
 {
@@ -15,6 +20,10 @@ FuntionProcess::FuntionProcess(vector<string> iniInputList)
 FuntionProcess::FuntionProcess(vector<string> iniInputList, double start, double end)
 {
 	InputProcess(iniInputList);
+<<<<<<< HEAD
+=======
+	CalculateAllFuntion(start, end);
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 }
 
 
@@ -50,6 +59,7 @@ void FuntionProcess::InputProcess(vector<string> iniInputList)
 				// 方程式
 				if (iniFormula[0] == 'y' && iniFormula[1] == '=')
 				{
+<<<<<<< HEAD
 					iniFormula.erase(0, 2);
 					Calculate funtionCalculate(iniFormula);
 					this->funtionList.push_back(funtionCalculate);
@@ -58,22 +68,58 @@ void FuntionProcess::InputProcess(vector<string> iniInputList)
 				{
 					// 測試變數名稱是否合法
 					bool errorVariableName = false;
+=======
+					// 先把所有funtion分類進funtionList
+					iniFormula.erase(0, 2);
+					this->inputList[ini].input = iniFormula;
+					this->inputList[ini].isFuntion = true;
+				}
+				else
+				{
+					this->inputList[ini].isFuntion = false;
+
+					// 測試變數名稱是否合法
+					bool errorVariableName = false;
+					bool hasEqual = false;
+					string variableTmp;
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 					int test = 0;
 					for (; test < iniFormula.size(); test++)
 					{
 						if (iniFormula[test] == '=')
 						{
+<<<<<<< HEAD
+=======
+							hasEqual = true;
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 							break;
 						}
 						else if (!((iniFormula[test] >= 'a' && iniFormula[test] <= 'z') || (iniFormula[test] >= 'A' && iniFormula[test] <= 'Z') || (iniFormula[test] >= '0' && iniFormula[test] <= '9')))
 						{
 							// 變數名稱錯誤
 							errorVariableName = true;
+<<<<<<< HEAD
+=======
+							this->inputList[ini].errorType = 13;
+							break;
+						}
+
+						variableTmp += iniFormula[test];
+					}
+
+					// 確認變數是否存在
+					for (int checkV = 0; checkV < this->variableList.size(); checkV++)
+					{
+						if (this->variableList[checkV].name == variableTmp)
+						{
+							this->inputList[ini].errorType = 14;
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 							break;
 						}
 					}
 
 					// 變數
+<<<<<<< HEAD
 					if (errorVariableName == false)
 					{
 						// 建立變數類別
@@ -87,14 +133,159 @@ void FuntionProcess::InputProcess(vector<string> iniInputList)
 						continue;
 					}
 
+=======
+					if (errorVariableName == false && hasEqual == true && this->inputList[ini].errorType == 0)
+					{
+						// 處理變數
+						iniFormula.erase(0, variableTmp.size() + 1);
+
+						Calculate tmp(iniFormula);
+
+						// 將後序式中的變數帶入數值
+						for (int i = 0; i < this->variableList.size(); i++)
+						{
+							for (int j = 0; j < tmp.GetPostOrderFormula().size(); j++)
+							{
+								if (this->variableList[i].name == tmp.GetPostOrderFormula()[j])
+								{
+									tmp.SetPostOrder(j, to_string(this->variableList[i].num));
+								}
+							}
+						}
+
+						this->inputList[ini].errorType = tmp.GetCError();
+
+						// 檢查是否有違法變數
+						for (int checkV = 0; checkV < tmp.GetPostOrderFormula().size(); checkV++)
+						{
+							string checkStr = tmp.GetPostOrderFormula()[checkV];
+							if (!(checkStr[0] >= '0' && checkStr[0] <= '9'))
+							{
+								if (!(checkStr[0] == 'x' || checkStr[0] == '+' || checkStr[0] == '-' || checkStr[0] == '*' || checkStr[0] == '/' || checkStr[0] == '@'))
+								{
+									this->inputList[ini].errorType = 13;
+									break;
+								}
+							}
+						}
+
+						if (this->inputList[ini].errorType == 0)
+						{
+							double variableNum = 0;
+
+							variableNum = tmp.GetAnsList();
+
+							this->inputList[ini].errorType = tmp.GetCError();
+
+							// 添加新變數
+							if (this->inputList[ini].errorType == 0)
+							{
+								VariableItem newVariable;
+
+								newVariable.name = variableTmp;
+								newVariable.num = variableNum;
+
+								this->variableList.push_back(newVariable);
+							}
+						}
+					}
+					// 錯誤
+					else if (errorVariableName == true || hasEqual == false)
+					{
+						this->inputList[ini].errorType = 13;
+						continue;
+					}
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 				}
 			}
 		}
 	}
 }
 
+<<<<<<< HEAD
 // 將變數值放入函式
 void FuntionProcess::PutInVariable()
 {
 
+=======
+// 給定範圍進行計算
+void FuntionProcess::CalculateAllFuntion(double start, double end)
+{
+	for (int round = 0; round < this->inputList.size(); round++)
+	{
+		if (this->inputList[round].isFuntion)
+		{
+			Calculate tmp(this->inputList[round].input);
+
+			// 將後序式中的變數帶入數值
+			for (int i = 0; i < this->variableList.size(); i++)
+			{
+				for (int j = 0; j < tmp.GetPostOrderFormula().size(); j++)
+				{
+					if (this->variableList[i].name == tmp.GetPostOrderFormula()[j])
+					{
+						tmp.SetPostOrder(j, to_string(this->variableList[i].num));
+					}
+				}
+			}
+
+			this->inputList[round].errorType = tmp.GetCError();
+
+			// 檢查是否有違法變數
+			for (int checkV = 0; checkV < tmp.GetPostOrderFormula().size(); checkV++)
+			{
+				string checkStr = tmp.GetPostOrderFormula()[checkV];
+				if (!(checkStr[0] >= '0' && checkStr[0] <= '9'))
+				{
+					if (!(checkStr[0] == 'x' || checkStr[0] == '+' || checkStr[0] == '-' || checkStr[0] == '*' || checkStr[0] == '/' || checkStr[0] == '@' || checkStr[0] == '^' || checkStr.substr(0, 4) == "sin(" || checkStr.substr(0, 4) == "cos(" || checkStr.substr(0, 4) == "tan("))
+					{
+						this->inputList[round].errorType = 13;
+						break;
+					}
+				}
+			}
+
+			if (this->inputList[round].errorType == 0)
+			{
+				vector<Pos> draw = tmp.GetAnsList(start, end);
+
+				if (!draw.empty())
+				{
+					this->drawList.push_back(draw);
+					this->colorList.push_back(round);
+				}
+				else
+				{
+					this->inputList[round].errorType = tmp.GetCError();
+				}
+			}
+		}
+	}
+}
+
+// 獲取錯誤碼清單
+vector<int> FuntionProcess::GetErrorList()
+{
+	vector<int> errorList;
+
+	// 將錯誤碼提出來
+	for (int i = 0; i < this->inputList.size(); i++)
+	{
+		errorList.push_back(inputList[i].errorType);
+	}
+
+	return errorList;
+}
+
+// 獲取要繪製的座標清單
+vector<vector<Pos>> FuntionProcess::GetDrawList()
+{
+	return this->drawList;
+}
+
+// 獲取可繪製的清單，對應到原始輸入的哪幾行
+vector<int> FuntionProcess::GetColorList()
+{
+	return this->colorList;
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 }
