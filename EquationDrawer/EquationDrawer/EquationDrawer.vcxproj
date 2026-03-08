@@ -85,12 +85,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <ClCompile Include="Calculate.cpp" />
+    <ClCompile Include="VariableProcess.cpp" />
+    <QtRcc Include="EquationDrawer.qrc" />
+    <QtUic Include="EquationDrawer.ui" />
+    <QtMoc Include="EquationDrawer.h" />
+    <ClCompile Include="EquationDrawer.cpp" />
     <ClCompile Include="MainFuntionProcess.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Calculate.h" />
+    <ClInclude Include="MainFuntionProcess.h" />
+    <ClInclude Include="VariableProcess.h" />
+=======
+=======
+    <ClCompile Include="MainFuntionProcess.cpp" />
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
     <QtRcc Include="EquationDrawer.qrc" />
     <QtUic Include="EquationBox.ui" />
     <QtUic Include="EquationDrawer.ui" />
     <QtMoc Include="EquationDrawer.h" />
+<<<<<<< HEAD
+=======
     <ClCompile Include="Calculate.cpp" />
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
     <ClCompile Include="EquationBox.cpp" />
     <ClCompile Include="EquationDrawer.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -104,9 +125,14 @@
     <QtMoc Include="Input.h" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <ClInclude Include="Pos.h" />
+>>>>>>> bdabd4533fbff351d43e4501a2222e67c7ada135
+=======
     <ClInclude Include="Calculate.h" />
     <ClInclude Include="MainFuntionProcess.h" />
     <ClInclude Include="Pos.h" />
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

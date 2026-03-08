@@ -1,11 +1,18 @@
 #pragma once
+<<<<<<< HEAD
+#include "VariableProcess.h"
+#include "Calculate.h"
+=======
 #include "Calculate.h"
 #include "Pos.h"
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 
 struct OriginInput
 {
 	string input;
 	int errorType = 0;
+<<<<<<< HEAD
+=======
 	bool isFuntion = true;
 };
 
@@ -13,6 +20,7 @@ struct VariableItem
 {
 	string name;
 	double num;
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 };
 
 // 函數處理類別
@@ -24,6 +32,36 @@ public:
 	FuntionProcess(vector<string> iniInputList);
 	FuntionProcess(vector<string> iniInputList, double start, double end);
 
+<<<<<<< HEAD
+	// 處理輸入
+	void InputProcess(vector<string> iniInputList);
+
+	//// 獲取錯誤碼
+	//int GetErrorType();
+	// 獲取錯誤代碼和詳細資料
+	string GetErrorTypeAndInformation();
+
+	// 獲得原始輸入清單
+	vector<OriginInput> GetInputList;
+	// 獲取變數清單
+	vector<VariableProcess> GetVariableList;
+	// 獲取方程式清單
+	vector<Calculate> GetFuntionList;
+	// 將變數值放入函式
+	void PutInVariable();
+
+private:
+	vector<OriginInput> inputList;
+	vector<VariableProcess> variableList;
+	vector<Calculate> funtionList;
+
+	/*
+	a = 3
+	b = 3a + 5
+	y = ax
+	y = 3x - b
+	*/
+=======
 	// 處理輸入，分辨是方程式還是變數
 	void InputProcess(vector<string> iniInputList);
 
@@ -46,5 +84,6 @@ private:
 
 	vector<vector<Pos>> drawList;	// 繪圖清單，裡面會放可繪製的座標清單
 	vector<int> colorList;			// 可繪製的清單，對應到原始輸入的哪幾行
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 };
 

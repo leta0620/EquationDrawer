@@ -1,7 +1,10 @@
 #include "MainFuntionProcess.h"
 
+<<<<<<< HEAD
+=======
 //-----------FuntionProcess-----------//
 
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 // 初始化
 FuntionProcess::FuntionProcess()
 {
@@ -17,7 +20,10 @@ FuntionProcess::FuntionProcess(vector<string> iniInputList)
 FuntionProcess::FuntionProcess(vector<string> iniInputList, double start, double end)
 {
 	InputProcess(iniInputList);
+<<<<<<< HEAD
+=======
 	CalculateAllFuntion(start, end);
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 }
 
 
@@ -53,6 +59,16 @@ void FuntionProcess::InputProcess(vector<string> iniInputList)
 				// 方程式
 				if (iniFormula[0] == 'y' && iniFormula[1] == '=')
 				{
+<<<<<<< HEAD
+					iniFormula.erase(0, 2);
+					Calculate funtionCalculate(iniFormula);
+					this->funtionList.push_back(funtionCalculate);
+				}
+				else
+				{
+					// 測試變數名稱是否合法
+					bool errorVariableName = false;
+=======
 					// 先把所有funtion分類進funtionList
 					iniFormula.erase(0, 2);
 					this->inputList[ini].input = iniFormula;
@@ -66,18 +82,24 @@ void FuntionProcess::InputProcess(vector<string> iniInputList)
 					bool errorVariableName = false;
 					bool hasEqual = false;
 					string variableTmp;
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 					int test = 0;
 					for (; test < iniFormula.size(); test++)
 					{
 						if (iniFormula[test] == '=')
 						{
+<<<<<<< HEAD
+=======
 							hasEqual = true;
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 							break;
 						}
 						else if (!((iniFormula[test] >= 'a' && iniFormula[test] <= 'z') || (iniFormula[test] >= 'A' && iniFormula[test] <= 'Z') || (iniFormula[test] >= '0' && iniFormula[test] <= '9')))
 						{
 							// 變數名稱錯誤
 							errorVariableName = true;
+<<<<<<< HEAD
+=======
 							this->inputList[ini].errorType = 13;
 							break;
 						}
@@ -91,11 +113,27 @@ void FuntionProcess::InputProcess(vector<string> iniInputList)
 						if (this->variableList[checkV].name == variableTmp)
 						{
 							this->inputList[ini].errorType = 14;
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 							break;
 						}
 					}
 
 					// 變數
+<<<<<<< HEAD
+					if (errorVariableName == false)
+					{
+						// 建立變數類別
+						VariableProcess variable(iniFormula);
+
+					}
+					// 錯誤
+					else if (errorVariableName == true)
+					{
+						this->inputList[ini].errorType = 1;
+						continue;
+					}
+
+=======
 					if (errorVariableName == false && hasEqual == true && this->inputList[ini].errorType == 0)
 					{
 						// 處理變數
@@ -157,12 +195,19 @@ void FuntionProcess::InputProcess(vector<string> iniInputList)
 						this->inputList[ini].errorType = 13;
 						continue;
 					}
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 				}
 			}
 		}
 	}
 }
 
+<<<<<<< HEAD
+// 將變數值放入函式
+void FuntionProcess::PutInVariable()
+{
+
+=======
 // 給定範圍進行計算
 void FuntionProcess::CalculateAllFuntion(double start, double end)
 {
@@ -242,4 +287,5 @@ vector<vector<Pos>> FuntionProcess::GetDrawList()
 vector<int> FuntionProcess::GetColorList()
 {
 	return this->colorList;
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 }

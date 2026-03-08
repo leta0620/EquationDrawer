@@ -7,6 +7,8 @@ EquationBox::EquationBox(QWidget* parent)
 
     connect(ui.pushButton_Visible, SIGNAL(clicked()), this, SLOT(on_pushButton_Visible_onclicked()));
     connect(ui.pushButton_Delete, SIGNAL(clicked()), this, SLOT(on_pushButton_Delete_onclicked()));
+<<<<<<< HEAD
+=======
     connect(ui.pushButton_Color, SIGNAL(clicked()), this, SLOT(on_pushButton_Color_onclicked()));
 
     selCol = QColor(0, 0, 0);
@@ -16,10 +18,14 @@ EquationBox::EquationBox(QWidget* parent)
     isVisible = true;
 
     ui.textEdit->installEventFilter(this);
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 }
 
 void EquationBox::on_pushButton_Visible_onclicked()
 {
+<<<<<<< HEAD
+    ui.textEdit->setText("gg");
+=======
     if (isVisible)
     {
         ui.pushButton_Visible->setText(QString::fromLocal8Bit("¤£¥i¨£"));
@@ -31,6 +37,7 @@ void EquationBox::on_pushButton_Visible_onclicked()
         isVisible = true;
     }
     emit reDraw();
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 }
 
 void EquationBox::on_pushButton_Delete_onclicked()
@@ -38,6 +45,8 @@ void EquationBox::on_pushButton_Delete_onclicked()
     emit sendDel(listItem);
 }
 
+<<<<<<< HEAD
+=======
 void EquationBox::on_pushButton_Color_onclicked()
 {
     selCol = col.getColor();
@@ -46,6 +55,7 @@ void EquationBox::on_pushButton_Color_onclicked()
     emit reDraw();
 }
 
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 void EquationBox::SetListItem(QListWidgetItem* item)
 {
     listItem = item;
@@ -56,6 +66,8 @@ void EquationBox::SetEquation(QString str)
     ui.textEdit->setText(str);
 }
 
+<<<<<<< HEAD
+=======
 std::string EquationBox::GetEquation()
 {
     QString temp = ui.textEdit->toPlainText();
@@ -104,3 +116,4 @@ bool EquationBox::eventFilter(QObject* obj, QEvent* eve)
         return QWidget::eventFilter(obj, eve);
     }
 }
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc

@@ -5,11 +5,23 @@ EquationDrawer::EquationDrawer(QWidget *parent)
 {
     ui.setupUi(this);
 
+<<<<<<< HEAD
+    center.setPos(2.5, 3.7);
+=======
     center.setPos(0, 0);
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
     factor = 100;
 
     connect(ui.pushButton_Add, SIGNAL(clicked()), this, SLOT(on_pushButton_Add_onclicked()));
     connect(ui.pushButton_Draw, SIGNAL(clicked()), this, SLOT(on_pushButton_Draw_onclicked()));
+<<<<<<< HEAD
+    connect(&inp, SIGNAL(sendInput(QString)), this, SLOT(receiveInput(QString)));
+
+    QSize temp = ui.graphicsView->viewport()->size();
+    ui.textBrowser->setText(QString::number(temp.width()));
+    scene.setSceneRect(0, 0, 800, 800);
+    ui.graphicsView->viewport()->installEventFilter(this);
+=======
     connect(ui.pushButton_Back, SIGNAL(clicked()), this, SLOT(on_pushButton_Back_onclicked()));
     connect(&inp, SIGNAL(sendInput(QString)), this, SLOT(receiveInput(QString)));
 
@@ -17,6 +29,7 @@ EquationDrawer::EquationDrawer(QWidget *parent)
 
     ui.graphicsView->viewport()->installEventFilter(this);
     ui.graphicsView->setSceneRect(0, 0, 800, 800);
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 }
 
 void EquationDrawer::on_pushButton_Add_onclicked()
@@ -31,6 +44,8 @@ void EquationDrawer::on_pushButton_Draw_onclicked()
     paint();
 }
 
+<<<<<<< HEAD
+=======
 void EquationDrawer::on_pushButton_Back_onclicked()
 {
     vector<string> equs;
@@ -49,12 +64,16 @@ void EquationDrawer::on_pushButton_Back_onclicked()
     paint();
 }
 
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 void EquationDrawer::receiveDel(QListWidgetItem* toDelete)
 {
     QListWidgetItem* item = toDelete;
     ui.listWidget->removeItemWidget(item);
     delete item;
+<<<<<<< HEAD
+=======
     paint();
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 }
 
 void EquationDrawer::receiveInput(QString toInput)
@@ -65,6 +84,15 @@ void EquationDrawer::receiveInput(QString toInput)
     itemWidget->SetListItem(item);
     itemWidget->SetEquation(toInput);
     connect(itemWidget, SIGNAL(sendDel(QListWidgetItem*)), this, SLOT(receiveDel(QListWidgetItem*)));
+<<<<<<< HEAD
+
+    item->setSizeHint(QSize(301, 41));
+
+    ui.listWidget->addItem(item);
+    ui.listWidget->setItemWidget(item, itemWidget);
+    ui.textBrowser->setText(QString::number(ui.listWidget->count()));
+    inp.close();
+=======
     connect(itemWidget, SIGNAL(reDraw()), this, SLOT(paint()));
 
     item->setSizeHint(QSize(521, 41));
@@ -73,6 +101,7 @@ void EquationDrawer::receiveInput(QString toInput)
     ui.listWidget->setItemWidget(item, itemWidget);
     inp.close();
     paint();
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 }
 
 //事件過濾器
@@ -84,6 +113,10 @@ bool EquationDrawer::eventFilter(QObject* obj, QEvent* eve)
         QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(eve);
         QString temp = QString::number(mouseEvent->x()) + " " + QString::number(mouseEvent->y()) + " ";
         clickPos = mouseEvent->pos();
+<<<<<<< HEAD
+        ui.textBrowser->setText(temp);
+=======
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
         return true;
     }
     else if (eve->type() == QEvent::MouseMove)
@@ -105,6 +138,17 @@ bool EquationDrawer::eventFilter(QObject* obj, QEvent* eve)
         QWheelEvent* wheelEvent = static_cast<QWheelEvent*>(eve);
         int numDegrees = wheelEvent->angleDelta().y();
         if (numDegrees > 0)
+<<<<<<< HEAD
+            factor *= 1.1;
+        if (numDegrees < 0)
+            factor *= 0.9;
+
+        center.x += (wheelEvent->x() - 400) / factor * 0.1;
+        center.y -= (wheelEvent->y() - 400) / factor * 0.1;
+
+        paint();
+        ui.textBrowser->setText(QString::number(factor));
+=======
         {
             factor *= 1.25;
             center.x += (wheelEvent->x() - 400) / factor * 0.5;
@@ -119,6 +163,7 @@ bool EquationDrawer::eventFilter(QObject* obj, QEvent* eve)
 
         paint();
         QString t = QString::number(center.x) + " , " + QString::number(center.y) + " factor: " + QString::number(factor);
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
         return true;
     }
     else
@@ -138,6 +183,8 @@ void EquationDrawer::paint()
 {
     scene.clear();
     ui.graphicsView->viewport()->update();
+<<<<<<< HEAD
+=======
 
     drawLines();
     drawEquations();
@@ -148,6 +195,7 @@ void EquationDrawer::paint()
 
 void EquationDrawer::drawLines()
 {
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
     Pos start;
     Pos origin;
     start.setPos(0, 0);
@@ -225,17 +273,32 @@ void EquationDrawer::drawLines()
     }
     startX -= 800;
     startY -= 800;
+<<<<<<< HEAD
+=======
     /*
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
     for (int a = 0; a < 8; a++)
     {
         for (int b = 0; b < 8; b++)
         {
             Pos temp;
             temp = getPos(startX + a * 100, startY + b * 100);
+<<<<<<< HEAD
+            //if (temp.x == origin.x || temp.y == origin.y)
+            //{
+=======
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
             QString p = QString::number(temp.x) + " , " + QString::number(temp.y);
             QGraphicsTextItem* text = scene.addText(p);
             text->setPos(startX + a * 100, startY + b * 100);
             scene.addItem(text);
+<<<<<<< HEAD
+            //}
+        }
+    }
+    ui.graphicsView->setScene(&scene);
+    ui.graphicsView->show();
+=======
         }
     }*/
     Pos temp;
@@ -367,4 +430,5 @@ void EquationDrawer::drawEquations()
             //scene.addPolygon(polyline);
         }
     }
+>>>>>>> 11bee3459e5ce45f5dcd61cbe922c7305dd1e4dc
 }
